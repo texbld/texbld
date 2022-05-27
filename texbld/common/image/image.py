@@ -3,6 +3,7 @@ import hashlib
 import json
 import docker
 from texbld.utils.github import GitHubClient
+from texbld.utils.local import LocalClient
 
 
 @dataclass(order=True)
@@ -69,17 +70,22 @@ class GitHubImage(Image):
     def get_source(self):
         return self.source
 
-    # TODO: implement this. (Pulls from GitHub and gets the source)
-    # TODO: implement the parser for the toml file.
     def pull(self) -> None:
-        self.client.confirmsha256()
-        pass
+        self.client.unpack()
+        self.source = self.client.read_config()
 
 
 @dataclass(order=True)
 class LocalImage(Image):
     name: str
+    # useful for mockup testing where we don't actually need to implement local fs clients.
+    testing: bool = False
     source: SourceImage = None
+    client: LocalClient = field(init=False)
+
+    def __post_init__(self):
+        if not self.testing:
+            self.client = LocalClient(self.name)
 
     def get_source(self):
         return self.source
