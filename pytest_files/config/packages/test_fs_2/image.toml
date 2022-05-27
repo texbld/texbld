@@ -1,0 +1,35 @@
+name = "myimage"
+version = "1"
+
+# optional, but apk is the default.
+install = "apk add"
+update = "apk update"
+
+packages = [
+  "biber", "python3"
+]
+
+# other commands to run.
+setup = [
+  "pip install pygments",
+  "echo 'hello' > /hello/something.txt"
+]
+
+# inheritance patterns (all of them are mutually exclusive)
+[inherit]
+docker = "alpine"
+github = { owner = "texbld", repository = "base", rev = "rev", sha256 = "sha256" }
+local = "myowntemplate"
+
+
+[files]
+"script.sh" = "/script.sh"
+
+[project.files]
+"main.tex" = "main.tex"
+"Makefile" = "Makefile"
+
+[project.commands]
+compile = "latexmk -pdf main.tex"
+watch = "latexmk -pdf -pvc main.tex"
+clean = "rm -rf main.tex"

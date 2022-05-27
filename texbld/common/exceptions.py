@@ -4,3 +4,7 @@ class HashMismatch(Exception):
 
 class GitHubNotFound(Exception):
     pass
+
+
+class FsNotFound(Exception):
+    pass
