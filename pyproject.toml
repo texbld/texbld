@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "texbld"
+version = "0.1.0"
+description = "Build tool for reproducible LaTeX documents"
+authors = ["junikimm717 <junikimm717@gmail.com>"]
+license = "GPL-3.0-or-later"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+docker = "^5.0.3"
+pytest = "^7.1.2"
+jsonschema = "^4.5.1"
+
+[tool.poetry.dev-dependencies]
+autopep8 = "^1.6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
