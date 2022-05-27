@@ -78,14 +78,11 @@ class GitHubImage(Image):
 @dataclass(order=True)
 class LocalImage(Image):
     name: str
-    # useful for mockup testing where we don't actually need to implement local fs clients.
-    testing: bool = False
     source: SourceImage = None
-    client: LocalClient = field(init=False)
+    client: LocalClient = None
 
     def __post_init__(self):
-        if not self.testing:
-            self.client = LocalClient(self.name)
+        pass
 
     def get_source(self):
         return self.source
@@ -94,6 +91,7 @@ class LocalImage(Image):
     # TODO: implement this
 
     def pull(self) -> None:
+        self.client = LocalClient(self.name)
         pass
 
 

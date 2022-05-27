@@ -18,6 +18,7 @@ class GitHubClient:
     repository: str
     revision: str
     sha256: str = None
+    noconfirm: bool = False
     # there are times when we want to test file-fetching in git.
     testing: str = False
     browser: ImageFsBrowser = field(init=False)
@@ -33,7 +34,7 @@ class GitHubClient:
 
     def fetch(self):
         # fetch only if our tarball doesn't exist.
-        if not os.path.exists(self.tarball_path()) or self.getsha256() != self.sha256:
+        if not os.path.exists(self.tarball_path()) or self.getsha256() != self.sha256 or self.noconfirm:
             url = f"https://github.com/{self.owner}/{self.repository}/archive/{self.revision}.tar.gz"
             with http.request('GET', url, preload_content=False) as res:
                 # TODO: raise GitHubNotFound if we get a 404.
@@ -51,7 +52,7 @@ class GitHubClient:
 
     def confirmsha256(self):
         # did we actually fetch something new?
-        if not self.fetch():
+        if not self.fetch() or self.noconfirm:
             return False
         if (x := self.getsha256()) != self.sha256:
             raise HashMismatch(f"Actual: {x}, Got: {self.sha256}")

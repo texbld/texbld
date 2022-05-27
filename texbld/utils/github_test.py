@@ -11,6 +11,13 @@ def test_github():
     assert os.path.isdir(gth.decompressed_dir())
 
 
+def test_github_noconfirm():
+    gth = GitHubClient(owner="octocat", repository="Hello-World",
+                       revision="7fd1a60b01f91b314f59955a4e4d4e80d8edf11d", testing=True, noconfirm=True)
+    gth.unpack()
+    assert os.path.isdir(gth.decompressed_dir())
+
+
 def test_github_fail():
     gth = GitHubClient(
         owner="octocat", repository="Hello-World", revision="553c2077f0edc3d5dc5d17262f6aa498e69d6f8e",
