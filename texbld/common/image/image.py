@@ -2,29 +2,12 @@ from dataclasses import dataclass, field
 import hashlib
 import json
 import docker
+import texbld.parser as parser
+from texbld.common.image.parse import parse_source_image
+# import like this to prevent circular imports
+from texbld.common.image.sourceimage import SourceImage
 from texbld.utils.github import GitHubClient
 from texbld.utils.local import LocalClient
-
-
-@dataclass(order=True)
-class SourceImage:
-    inherit: 'Image'
-    name: str
-    packages: 'list[str]'
-    setup: 'list[str]'
-    files: 'dict[str,str]'
-    project_files: 'dict[str, str]'
-    project_commands: 'dict[str, str]'
-    install: str
-    update: str
-
-    def image_hash(self):
-        d = self.__dict__.copy()
-        # DO NOT TRY TO GET THIS HASH!!! YOU WON'T DETECT DEPENDENCY CYCLES!
-        d['inherit'] = None
-        return hashlib.sha256(
-            bytes(json.dumps(d), 'utf-8')
-        ).hexdigest()
 
 
 @dataclass(order=True)
@@ -71,8 +54,7 @@ class GitHubImage(Image):
         return self.source
 
     def pull(self) -> None:
-        self.client.unpack()
-        self.source = self.client.read_config()
+        self.source = parse_source_image(self.client.read_config())
 
 
 @dataclass(order=True)
@@ -92,7 +74,7 @@ class LocalImage(Image):
 
     def pull(self) -> None:
         self.client = LocalClient(self.name)
-        pass
+        self.source = parse_source_image(self.client.read_config())
 
 
 def main():

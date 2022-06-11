@@ -32,12 +32,12 @@ class GitHubClient:
     def decompressed_dir(self) -> str:
         return os.path.join(PACKAGE_CACHE_DIR, f"{self.repository}-{self.revision}")
 
-    def fetch(self):
+    # fetches a tarball and returns a boolean as to whether it actually happened.
+    def fetch(self) -> bool:
         # fetch only if our tarball doesn't exist.
         if not os.path.exists(self.tarball_path()) or self.getsha256() != self.sha256 or self.noconfirm:
             url = f"https://github.com/{self.owner}/{self.repository}/archive/{self.revision}.tar.gz"
             with http.request('GET', url, preload_content=False) as res:
-                # TODO: raise GitHubNotFound if we get a 404.
                 if res.status == 404:
                     raise GitHubNotFound(url)
                 with open(self.tarball_path(), 'wb') as w:

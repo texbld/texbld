@@ -6,6 +6,7 @@ from texbld.common.directory import PACKAGE_CACHE_DIR
 from texbld.common.exceptions import FsNotFound
 
 
+# sort everything in the directory so it's in a deterministic order.
 def files_list(path: str):
     if not os.path.isdir(path):
         raise FsNotFound(path)
@@ -16,7 +17,7 @@ def files_list(path: str):
     files.sort()
     return files
 
-# walk through the entire tree and hash stuff.
+# walk through the entire directory tree and hash files.
 
 
 def hash_dir(path: str):

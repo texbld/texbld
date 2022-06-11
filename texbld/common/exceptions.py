@@ -8,3 +8,11 @@ class GitHubNotFound(Exception):
 
 class FsNotFound(Exception):
     pass
+
+
+class NoSuchImageVersion(Exception):
+    pass
+
+
+class NoVersionSpecified(Exception):
+    pass

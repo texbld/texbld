@@ -8,6 +8,8 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 schema = json.load(open(os.path.join(current_dir, "image_schema.json")))
 validator = Draft7Validator(schema=schema)
 
+# helper method to determine what type of image is depended upon.
+
 
 def to_inherit(config: 'dict') -> Image:
     if 'docker' in config:
