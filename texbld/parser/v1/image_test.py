@@ -60,6 +60,25 @@ docker = "alpine"
     # pprint.pprint(to_source_image(source))
 
 
+def test_github_example():
+    source1 = """
+name = "myimage"
+version = "1"
+
+[inherit]
+github = { owner = "owner", repository = "repository", revision = "rev" }
+    """
+    source2 = """
+name = "myimage"
+version = "1"
+
+[inherit]
+github = { owner = "owner", repository = "repository", revision = "rev", sha256 = "sha256" }
+    """
+    to_source_image(source1)
+    to_source_image(source2)
+
+
 def test_exclusion_fail():
     source = """
 name = "myimage"

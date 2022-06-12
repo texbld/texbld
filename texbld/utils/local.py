@@ -12,21 +12,21 @@ class LocalClient:
     # it's stuff from your local fs, so no sha256 needed.
     name: str
     browser: ImageFsBrowser = field(init=False)
-    path: str = field(init=False)
+    cache_path: str = field(init=False)
 
     def __post_init__(self):
         # change this name to a random string.
         self.browser = ImageFsBrowser(
             path=os.path.join(LOCALPACKAGES_DIR, self.name))
-        self.path = os.path.join(PACKAGE_CACHE_DIR, f"{self.name}-{self.browser.config_hash}")
+        self.cache_path = os.path.join(PACKAGE_CACHE_DIR, f"{self.name}-{self.browser.config_hash}")
         self.copy()
 
     def copy(self):
         # only do if there is a hash mismatch.
-        if os.path.isdir(self.path) and fs.hash_dir(self.path) != self.browser.config_hash:
-            shutil.rmtree(self.path)
-        if not os.path.exists(self.path):
-            shutil.copytree(self.browser.path, self.path)
+        if os.path.isdir(self.cache_path) and fs.hash_dir(self.cache_path) != self.browser.config_hash:
+            shutil.rmtree(self.cache_path)
+        if not os.path.exists(self.cache_path):
+            shutil.copytree(self.browser.path, self.cache_path)
 
     def read_config(self):
         return self.browser.read_config()

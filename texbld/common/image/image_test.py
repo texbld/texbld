@@ -1,5 +1,6 @@
+import pytest
 from texbld.common.image import *
-import texbld.common.exceptions as exceptions
+from texbld.common.exceptions import DockerNotFound
 
 
 def test_image_hash_matches():
@@ -94,3 +95,19 @@ def test_nested_hash_fail():
     local3 = LocalImage(name="image_name", source=s3)
     # should not fail
     assert local2.image_hash() != local3.image_hash()
+
+
+def test_docker_good():
+    d = DockerImage(
+        name="alpine:latest"
+    )
+    image = d.pull()
+    assert 'alpine:latest' in image.tags
+
+
+def test_docker_bad():
+    d = DockerImage(
+        name="doesnotexist"
+    )
+    with pytest.raises(DockerNotFound):
+        d.pull()

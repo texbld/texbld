@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
 import hashlib
 import json
-import docker
+from docker.errors import ImageNotFound
+from texbld.common.exceptions import DockerNotFound
 import texbld.parser as parser
 from texbld.docker.client import dockerclient
 from texbld.common.image.parse import parse_source_image
@@ -37,8 +38,11 @@ class Image:
 class DockerImage(Image):
     name: str
 
-    def pull(self) -> None:
-        dockerclient.images.pull(self.name)
+    def pull(self):
+        try:
+            return dockerclient.images.pull(self.name)
+        except ImageNotFound:
+            raise DockerNotFound(self.name)
 
     def is_base(self) -> bool:
         return True
@@ -49,7 +53,7 @@ class GitHubImage(Image):
     owner: str
     repository: str
     revision: str
-    sha256: str
+    sha256: str = None
     source: SourceImage = None
     client: GitHubClient = field(init=False)
 
@@ -63,6 +67,8 @@ class GitHubImage(Image):
     def pull(self) -> None:
         # pull only if we haven't pre-defined a source.
         if not self.source:
+            self.client.unpack()
+            self.client.get_browser()
             self.source = parse_source_image(self.client.read_config())
 
 

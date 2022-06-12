@@ -18,19 +18,18 @@ class GitHubClient:
     repository: str
     revision: str
     sha256: str = None
-    noconfirm: bool = False
     # there are times when we want to test file-fetching in git.
-    testing: str = False
     browser: ImageFsBrowser = field(init=False)
+    noconfirm: bool = field(init=False)
 
     def __post_init__(self):
-        pass
+        self.noconfirm = (self.sha256 is None)
 
     def tarball_path(self) -> str:
-        return os.path.join(TARBALL_CACHE_DIR, f"{self.repository}-{self.revision}.tar.gz")
+        return os.path.join(TARBALL_CACHE_DIR, f"{self.owner}-{self.repository}-{self.revision}.tar.gz")
 
     def decompressed_dir(self) -> str:
-        return os.path.join(PACKAGE_CACHE_DIR, f"{self.repository}-{self.revision}")
+        return os.path.join(PACKAGE_CACHE_DIR, f"{self.owner}-{self.repository}-{self.revision}")
 
     # fetches a tarball and returns a boolean as to whether it actually happened.
     def fetch(self) -> bool:
@@ -60,10 +59,22 @@ class GitHubClient:
 
     def unpack(self):
         self.confirmsha256()
+        original_dir = f"{self.repository}-{self.revision}/"
         with tarfile.open(self.tarball_path(), 'r:gz') as archive:
-            archive.extractall(path=PACKAGE_CACHE_DIR)
-        if not self.testing:
-            self.browser = ImageFsBrowser(path=self.decompressed_dir())
+            # code to modify the member paths.
+            members = [
+                m
+                for m in archive.getmembers()
+                if m.path.startswith(original_dir)
+            ]
+            for m in members:
+                m.path = m.path[len(original_dir):]
+            os.makedirs(self.decompressed_dir(), exist_ok=True)
+            archive.extractall(path=self.decompressed_dir(), members=members)
+
+    def get_browser(self) -> 'ImageFsBrowser':
+        self.browser = ImageFsBrowser(path=self.decompressed_dir())
+        return self.browser
 
     def read_config(self):
         self.unpack()
