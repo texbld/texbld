@@ -52,7 +52,7 @@ class DockerImage(Image):
         return True
 
     def docker_image_name(self):
-        return f"TeXbld-docker-{self.name}-{self.image_hash()}"
+        return self.name
 
 
 @dataclass(order=True)
