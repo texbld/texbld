@@ -3,6 +3,7 @@ import hashlib
 import json
 import docker
 import texbld.parser as parser
+from texbld.docker.client import dockerclient
 from texbld.common.image.parse import parse_source_image
 # import like this to prevent circular imports
 from texbld.common.image.sourceimage import SourceImage
@@ -35,11 +36,9 @@ class Image:
 @dataclass(order=True)
 class DockerImage(Image):
     name: str
-    source: SourceImage = None
 
-    # TODO: implement this (Docker SDK's)
     def pull(self) -> None:
-        pass
+        dockerclient.images.pull(self.name)
 
     def is_base(self) -> bool:
         return True

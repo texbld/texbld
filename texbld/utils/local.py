@@ -18,10 +18,8 @@ class LocalClient:
         # change this name to a random string.
         self.browser = ImageFsBrowser(
             path=os.path.join(LOCALPACKAGES_DIR, self.name))
-        name = f"{self.name}-{self.browser.config_hash}"
-        self.path = os.path.join(PACKAGE_CACHE_DIR, name)
+        self.path = os.path.join(PACKAGE_CACHE_DIR, f"{self.name}-{self.browser.config_hash}")
         self.copy()
-        pass
 
     def copy(self):
         # only do if there is a hash mismatch.
