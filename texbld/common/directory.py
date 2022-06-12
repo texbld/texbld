@@ -7,7 +7,8 @@ CACHE_BASE = os.path.join(Path.home(), ".cache", "texbld")
 
 
 if "pytest" in sys.modules:
-    dirname = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "test_files")
+    dirname = os.path.join(os.path.dirname(
+        os.path.dirname(os.path.dirname(__file__))), "test_files")
     CONFIG_BASE = os.path.join(dirname, "config")
     CACHE_BASE = os.path.join(dirname, "cache")
 

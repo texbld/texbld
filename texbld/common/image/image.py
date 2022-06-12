@@ -55,7 +55,8 @@ class GitHubImage(Image):
     client: GitHubClient = field(init=False)
 
     def __post_init__(self):
-        self.client = GitHubClient(self.owner, self.repository, self.revision, self.sha256)
+        self.client = GitHubClient(
+            self.owner, self.repository, self.revision, self.sha256)
 
     def get_source(self):
         return self.source

@@ -16,7 +16,8 @@ class LocalClient:
 
     def __post_init__(self):
         # change this name to a random string.
-        self.browser = ImageFsBrowser(path=os.path.join(LOCALPACKAGES_DIR, self.name))
+        self.browser = ImageFsBrowser(
+            path=os.path.join(LOCALPACKAGES_DIR, self.name))
         name = f"{self.name}-{self.browser.config_hash}"
         self.path = os.path.join(PACKAGE_CACHE_DIR, name)
         self.copy()
