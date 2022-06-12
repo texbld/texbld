@@ -3,17 +3,17 @@ import hashlib
 import json
 from docker.errors import ImageNotFound
 from texbld.common.exceptions import DockerNotFound
-import texbld.parser as parser
 from texbld.docker.client import dockerclient
 from texbld.common.image.parse import parse_source_image
 # import like this to prevent circular imports
 from texbld.common.image.sourceimage import SourceImage
 from texbld.utils.github import GitHubClient
 from texbld.utils.local import LocalClient
+from abc import ABC, abstractmethod
 
 
 @dataclass(order=True)
-class Image:
+class Image(ABC):
 
     def image_hash(self):
         d = self.__dict__.copy()
@@ -22,6 +22,10 @@ class Image:
         return hashlib.sha256(
             bytes(json.dumps(d), 'utf-8')
         ).hexdigest()
+
+    @abstractmethod
+    def docker_image_name(self):
+        pass
 
     def pull(self) -> None:
         pass
@@ -47,6 +51,9 @@ class DockerImage(Image):
     def is_base(self) -> bool:
         return True
 
+    def docker_image_name(self):
+        return f"TeXbld-docker-{self.name}-{self.image_hash()}"
+
 
 @dataclass(order=True)
 class GitHubImage(Image):
@@ -55,7 +62,7 @@ class GitHubImage(Image):
     revision: str
     sha256: str = None
     source: SourceImage = None
-    client: GitHubClient = field(init=False)
+    client: GitHubClient = None
 
     def __post_init__(self):
         self.client = GitHubClient(
@@ -66,10 +73,15 @@ class GitHubImage(Image):
 
     def pull(self) -> None:
         # pull only if we haven't pre-defined a source.
-        if not self.source:
+        if not self.source or not self.client:
             self.client.unpack()
             self.client.get_browser()
             self.source = parse_source_image(self.client.read_config())
+
+    def docker_image_name(self):
+        if not hasattr(self.client, 'browser'):
+            self.pull()
+        return f"TeXbld-github-{self.name}-{self.client.browser.hashed}"
 
 
 @dataclass(order=True)
@@ -86,19 +98,11 @@ class LocalImage(Image):
 
     def pull(self) -> None:
         # pull only if we haven't pre-defined a source.
-        if not self.source:
+        if not self.source or not self.client:
             self.client = LocalClient(self.name)
             self.source = parse_source_image(self.client.read_config())
 
-
-def main():
-    x = SourceImage(name="hello", packages=[], setup=[], files={})
-    y = SourceImage(name="hello", packages=[], setup=[], files={})
-    print(x.image_hash())
-    print(json.dumps(x.__dict__))
-    print(y.image_hash())
-    print(json.dumps(y.__dict__))
-
-
-if __name__ == "__main__":
-    main()
+    def docker_image_name(self):
+        if not hasattr(self.client, 'browser'):
+            self.pull()
+        return f"TeXbld-local-{self.name}-{self.client.browser.hashed}"

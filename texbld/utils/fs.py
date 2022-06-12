@@ -32,7 +32,7 @@ def hash_dir(path: str):
 class ImageFsBrowser:
     path: str
     name: str = field(init=False)
-    config_hash: str = field(init=False)
+    hashed: str = field(init=False)
     imagepath: str = field(init=False)
 
     def __post_init__(self):
@@ -41,7 +41,7 @@ class ImageFsBrowser:
         self.name = os.path.basename(self.path)
         if not os.path.isfile(self.imagepath):
             raise FsNotFound(self.imagepath)
-        self.config_hash = hash_dir(self.path)
+        self.hashed = hash_dir(self.path)
 
     def read_config(self):
         try:
