@@ -1,0 +1,22 @@
+name = "test_dep1_2"
+version = "1"
+
+# optional, but apk is the default.
+install = "apk add"
+update = "apk update"
+
+packages = [
+  "biber", "python3"
+]
+
+[inherit]
+local = "test_dep1_1"
+
+[project.files]
+"template.tex" = "main.tex"
+"Makefile" = "Makefile"
+
+[project.commands]
+compile = "latexmk -pdf main.tex"
+watch = "latexmk -pdf -pvc main.tex"
+clean = "rm -rf main.tex"

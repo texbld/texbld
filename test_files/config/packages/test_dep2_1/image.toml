@@ -1,0 +1,5 @@
+name = "myimage"
+version = "1"
+
+[inherit]
+local = "test_dep2_2"

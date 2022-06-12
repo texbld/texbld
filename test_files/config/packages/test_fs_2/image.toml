@@ -16,6 +16,7 @@ setup = [
 ]
 
 # inheritance patterns (all of them are mutually exclusive)
+# we don't care in this test because we are only checking filesystem stuff.
 [inherit]
 docker = "alpine"
 github = { owner = "texbld", repository = "base", rev = "rev", sha256 = "sha256" }

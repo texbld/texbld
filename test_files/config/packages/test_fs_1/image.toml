@@ -16,6 +16,7 @@ setup = [
 ]
 
 # inheritance patterns (all of them are mutually exclusive)
+# we don't care because we only care about filesystem stuff.
 [inherit]
 docker = "alpine"
 github = { owner = "texbld", repository = "base", rev = "rev", sha256 = "sha256" }

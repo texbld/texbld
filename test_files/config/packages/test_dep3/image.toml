@@ -1,0 +1,5 @@
+name = "myimage"
+version = "1"
+
+[inherit]
+local = "nonexistent"

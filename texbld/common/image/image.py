@@ -24,8 +24,12 @@ class Image:
     def pull(self) -> None:
         pass
 
-    def get_source(self):
+    def get_source(self) -> 'SourceImage | None':
         return None
+
+    # does it NOT inherit from something? (In which case we can cut the dependency chasing.)
+    def is_base(self) -> bool:
+        return False
 
 
 @dataclass(order=True)
@@ -36,6 +40,9 @@ class DockerImage(Image):
     # TODO: implement this (Docker SDK's)
     def pull(self) -> None:
         pass
+
+    def is_base(self) -> bool:
+        return True
 
 
 @dataclass(order=True)
@@ -54,7 +61,9 @@ class GitHubImage(Image):
         return self.source
 
     def pull(self) -> None:
-        self.source = parse_source_image(self.client.read_config())
+        # pull only if we haven't pre-defined a source.
+        if not self.source:
+            self.source = parse_source_image(self.client.read_config())
 
 
 @dataclass(order=True)
@@ -63,9 +72,6 @@ class LocalImage(Image):
     source: SourceImage = None
     client: LocalClient = None
 
-    def __post_init__(self):
-        pass
-
     def get_source(self):
         return self.source
 
@@ -73,8 +79,10 @@ class LocalImage(Image):
     # TODO: implement this
 
     def pull(self) -> None:
-        self.client = LocalClient(self.name)
-        self.source = parse_source_image(self.client.read_config())
+        # pull only if we haven't pre-defined a source.
+        if not self.source:
+            self.client = LocalClient(self.name)
+            self.source = parse_source_image(self.client.read_config())
 
 
 def main():
