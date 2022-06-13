@@ -1,0 +1,9 @@
+name = "myimage"
+version = "1"
+
+[inherit.github]
+owner = "texbld"
+repository = "sample-image"
+config = "markdown.toml"
+revision="04f2b5a50d65eeb2b42f7329c7eea37d8c880c85"
+sha256="63a8827ae24969d0d829365f54fa4aa3e001a1f2f76b47fd96ac482894c35c00"

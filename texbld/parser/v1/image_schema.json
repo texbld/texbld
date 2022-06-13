@@ -45,7 +45,8 @@
                 "owner": { "type": "string" },
                 "repository": { "type": "string" },
                 "revision": { "type": "string" },
-                "sha256": { "type": "string" }
+                "sha256": { "type": "string" },
+                "config": { "type": "string" }
               },
               "required": ["owner", "repository", "revision"],
               "additionalProperties": false

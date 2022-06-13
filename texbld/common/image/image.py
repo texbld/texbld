@@ -16,16 +16,19 @@ from abc import ABC, abstractmethod
 class Image(ABC):
 
     def image_hash(self):
-        d = self.__dict__.copy()
-        d['class'] = self.__class__.__name__
-        d['source'] = d.get('source').image_hash() if d.get('source') else None
         return hashlib.sha256(
-            bytes(json.dumps(d), 'utf-8')
+            bytes(json.dumps(self.serialized()), 'utf-8')
         ).hexdigest()
 
     @abstractmethod
     def docker_image_name(self):
         pass
+
+    def serialized(self) -> 'dict':
+        d = self.__dict__.copy()
+        d['class'] = self.__class__.__name__
+        d['source'] = d.get('source').image_hash() if d.get('source') else None
+        return d
 
     def pull(self) -> None:
         pass
@@ -79,6 +82,11 @@ class GitHubImage(Image):
             self.client.unpack()
             self.client.get_browser()
             self.source = parse_source_image(self.client.read_config())
+
+    def serialized(self) -> 'dict':
+        d = super().serialized()
+        del d['client']
+        return d
 
     def docker_image_name(self):
         if not hasattr(self.client, 'browser'):
