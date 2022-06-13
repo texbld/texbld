@@ -1,0 +1,12 @@
+FROM {{ inherits }}
+WORKDIR /texbld
+RUN {{ update }}
+{% if packages|length > 0 %}
+RUN {{ install }} {% for  package in packages %} {{ package }} {% endfor %}
+{%endif%}
+{% for source,target in files.items() %}
+COPY {{source}} {{target}}
+{% endfor %}
+{% for command in setup %}
+RUN {{ command }}
+{% endfor %}

@@ -24,6 +24,10 @@ class Image(ABC):
     def docker_image_name(self):
         pass
 
+    @abstractmethod
+    def package_dir(self) -> str:
+        pass
+
     def serialized(self) -> 'dict':
         d = self.__dict__.copy()
         d['class'] = self.__class__.__name__
@@ -57,6 +61,9 @@ class DockerImage(Image):
     def docker_image_name(self):
         return self.name
 
+    def package_dir(self) -> str:
+        return None
+
 
 @dataclass(order=True)
 class GitHubImage(Image):
@@ -83,6 +90,7 @@ class GitHubImage(Image):
             self.client.get_browser()
             self.source = parse_source_image(self.client.read_config())
 
+    # re-implement serialized to get rid of client (since it isn't JSON serializable)
     def serialized(self) -> 'dict':
         d = super().serialized()
         del d['client']
@@ -91,7 +99,10 @@ class GitHubImage(Image):
     def docker_image_name(self):
         if not hasattr(self.client, 'browser'):
             self.pull()
-        return f"TeXbld-github-{self.name}-{self.client.browser.hashed}-{self.source.image_hash()}"
+        return f"TeXbld-github-{self.repository}-{self.client.browser.hashed}-{self.source.image_hash()}"
+
+    def package_dir(self) -> str:
+        return self.client.browser.path
 
 
 @dataclass(order=True)
@@ -117,3 +128,6 @@ class LocalImage(Image):
         if not hasattr(self.client, 'browser'):
             self.pull()
         return f"TeXbld-local-{self.name}-{self.client.browser.hashed}-{self.source.image_hash()}"
+
+    def package_dir(self) -> str:
+        return self.client.browser.path

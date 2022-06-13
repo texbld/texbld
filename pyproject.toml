@@ -9,6 +9,7 @@ license = "GPL-3.0-or-later"
 python = "^3.9"
 docker = "^5.0.3"
 jsonschema = "^4.5.1"
+Jinja2 = "^3.1.2"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.6.0"
