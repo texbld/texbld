@@ -18,6 +18,7 @@ class GitHubClient:
     repository: str
     revision: str
     sha256: str = None
+    config: str = "image.toml"
     # there are times when we want to test file-fetching in git.
     browser: ImageFsBrowser = field(init=False)
     noconfirm: bool = field(init=False)
@@ -73,7 +74,7 @@ class GitHubClient:
             archive.extractall(path=self.decompressed_dir(), members=members)
 
     def get_browser(self) -> 'ImageFsBrowser':
-        self.browser = ImageFsBrowser(path=self.decompressed_dir())
+        self.browser = ImageFsBrowser(path=self.decompressed_dir(), config=self.config)
         return self.browser
 
     def read_config(self):

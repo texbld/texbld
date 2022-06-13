@@ -31,13 +31,14 @@ def hash_dir(path: str):
 @dataclass
 class ImageFsBrowser:
     path: str
+    config: str = "image.toml"
     name: str = field(init=False)
     hashed: str = field(init=False)
     imagepath: str = field(init=False)
 
     def __post_init__(self):
         self.path = os.path.abspath(self.path)
-        self.imagepath = os.path.join(self.path, "image.toml")
+        self.imagepath = os.path.join(self.path, self.config)
         self.name = os.path.basename(self.path)
         if not os.path.isfile(self.imagepath):
             raise FsNotFound(self.imagepath)

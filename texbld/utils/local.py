@@ -11,13 +11,15 @@ from texbld.common.exceptions import FsNotFound
 class LocalClient:
     # it's stuff from your local fs, so no sha256 needed.
     name: str
+    config: str = "image.toml"
     browser: ImageFsBrowser = field(init=False)
     cache_path: str = field(init=False)
 
     def __post_init__(self):
         # change this name to a random string.
         self.browser = ImageFsBrowser(
-            path=os.path.join(LOCALPACKAGES_DIR, self.name))
+            path=os.path.join(LOCALPACKAGES_DIR, self.name), config=self.config
+        )
         self.cache_path = os.path.join(PACKAGE_CACHE_DIR, f"{self.name}-{self.browser.hashed}")
         self.copy()
 

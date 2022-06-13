@@ -61,12 +61,14 @@ class GitHubImage(Image):
     repository: str
     revision: str
     sha256: str = None
+    config: str = "image.toml"
     source: SourceImage = None
     client: GitHubClient = None
 
     def __post_init__(self):
         self.client = GitHubClient(
-            self.owner, self.repository, self.revision, self.sha256)
+            self.owner, self.repository, self.revision, self.sha256, self.config
+        )
 
     def get_source(self):
         return self.source
@@ -87,6 +89,7 @@ class GitHubImage(Image):
 @dataclass(order=True)
 class LocalImage(Image):
     name: str
+    config: str = "image.toml"
     source: SourceImage = None
     client: LocalClient = None
 
