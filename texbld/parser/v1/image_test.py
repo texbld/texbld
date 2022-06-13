@@ -57,7 +57,38 @@ docker = "alpine"
     """
     instance = toml.loads(source)
     assert v.is_valid(instance=toml.loads(source))
-    # pprint.pprint(to_source_image(source))
+
+
+def test_minimal_example_2():
+    source = """
+name = "myimage"
+version = "1"
+
+# inheritance patterns (all of them are mutually exclusive)
+[inherit]
+local = {name = "dependency", config="image2.toml"}
+    """
+    instance = toml.loads(source)
+    assert v.is_valid(instance=instance)
+    dependency = to_source_image(source).inherit
+    assert hasattr(dependency, 'config')
+    assert dependency.config == "image2.toml"
+
+
+def test_minimal_example_3():
+    source = """
+name = "myimage"
+version = "1"
+
+# inheritance patterns (all of them are mutually exclusive)
+[inherit]
+local = "dependency"
+    """
+    instance = toml.loads(source)
+    assert v.is_valid(instance=instance)
+    dependency = to_source_image(source).inherit
+    assert hasattr(dependency, 'config')
+    assert dependency.config == "image.toml"
 
 
 def test_github_example():

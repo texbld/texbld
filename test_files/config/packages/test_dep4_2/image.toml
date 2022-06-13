@@ -1,0 +1,6 @@
+name = "myimage"
+version = "1"
+
+[inherit.local]
+name = "test_dep4_3"
+config = "somethingelse.toml"

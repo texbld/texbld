@@ -83,7 +83,7 @@ class GitHubImage(Image):
     def docker_image_name(self):
         if not hasattr(self.client, 'browser'):
             self.pull()
-        return f"TeXbld-github-{self.name}-{self.client.browser.hashed}"
+        return f"TeXbld-github-{self.name}-{self.client.browser.hashed}-{self.source.image_hash()}"
 
 
 @dataclass(order=True)
@@ -102,10 +102,10 @@ class LocalImage(Image):
     def pull(self) -> None:
         # pull only if we haven't pre-defined a source.
         if not self.source or not self.client:
-            self.client = LocalClient(self.name)
+            self.client = LocalClient(self.name, self.config)
             self.source = parse_source_image(self.client.read_config())
 
     def docker_image_name(self):
         if not hasattr(self.client, 'browser'):
             self.pull()
-        return f"TeXbld-local-{self.name}-{self.client.browser.hashed}"
+        return f"TeXbld-local-{self.name}-{self.client.browser.hashed}-{self.source.image_hash()}"

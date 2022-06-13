@@ -18,7 +18,10 @@ def to_inherit(config: 'dict') -> Image:
         g: dict = config['github']
         return GitHubImage(**g)
     elif 'local' in config:
-        return LocalImage(name=config['local'])
+        if type(config.get('local')) == str:
+            return LocalImage(name=config['local'])
+        else:
+            return LocalImage(**config['local'])
 
 
 # change this when the SourceImage spec changes over time.

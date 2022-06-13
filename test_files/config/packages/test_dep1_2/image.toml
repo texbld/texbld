@@ -10,7 +10,7 @@ packages = [
 ]
 
 [inherit]
-local = "test_dep1_1"
+local = {name = "test_dep1_1", config = "anotherconfig.toml"}
 
 [project.files]
 "template.tex" = "main.tex"

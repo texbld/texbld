@@ -57,7 +57,20 @@
         {
           "type": "object",
           "properties": {
-            "local": { "type": "string" }
+            "local": {
+              "oneOf": [
+                { "type": "string" },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "config": { "type": "string" }
+                  },
+                  "required": ["name", "config"],
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["local"],
           "additionalProperties": false
