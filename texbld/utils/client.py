@@ -17,7 +17,7 @@ class Client(ABC):
 
     def copy_to_builds(self, image: 'Image'):
         dockerfile = generate_dockerfile(image)
-        buildpath = os.path.join(BUILD_CACHE_DIR, image.docker_image_name())
+        buildpath = image.build_dir()
         if os.path.isdir(buildpath):
             shutil.rmtree(buildpath)
         os.makedirs(buildpath)

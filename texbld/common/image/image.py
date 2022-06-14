@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
 import hashlib
 import json
+import os
 from docker.errors import ImageNotFound
+from texbld.common.directory import BUILD_CACHE_DIR
 from texbld.common.exceptions import DockerNotFound
 from texbld.docker.client import dockerclient
 from texbld.common.image.parse import parse_source_image
@@ -27,6 +29,9 @@ class Image(ABC):
     @abstractmethod
     def package_dir(self) -> str:
         pass
+
+    def build_dir(self) -> str:
+        return os.path.join(BUILD_CACHE_DIR, self.docker_image_name())
 
     def copy_to_builds(self):
         pass
@@ -67,6 +72,9 @@ class DockerImage(Image):
     def package_dir(self) -> str:
         return None
 
+    def build_dir(self) -> str:
+        return None
+
 
 @dataclass(order=True)
 class GitHubImage(Image):
@@ -102,7 +110,7 @@ class GitHubImage(Image):
     def docker_image_name(self):
         if not hasattr(self.client, 'browser'):
             self.pull()
-        return f"TeXbld-github-{self.repository}-{self.client.browser.hashed}-{self.source.image_hash()}"
+        return f"texbld-github-{self.repository}-{self.client.browser.hashed}-{self.source.image_hash()}"
 
     def package_dir(self) -> str:
         return self.client.browser.path
@@ -133,7 +141,13 @@ class LocalImage(Image):
     def docker_image_name(self):
         if not hasattr(self.client, 'browser'):
             self.pull()
-        return f"TeXbld-local-{self.name}-{self.client.browser.hashed}-{self.source.image_hash()}"
+        return f"texbld-local-{self.name}-{self.client.browser.hashed}-{self.source.image_hash()}"
+
+    # re-implement serialized to get rid of client (since it isn't JSON serializable)
+    def serialized(self) -> 'dict':
+        d = super().serialized()
+        del d['client']
+        return d
 
     def package_dir(self) -> str:
         return self.client.browser.path

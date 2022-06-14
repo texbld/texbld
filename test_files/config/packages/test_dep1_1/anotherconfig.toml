@@ -6,7 +6,7 @@ install = "apk add"
 update = "apk update"
 
 packages = [
-  "cowsay"
+  "make"
 ]
 
 [inherit]
