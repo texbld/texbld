@@ -6,6 +6,7 @@ import shutil
 import os
 import hashlib
 import tarfile
+from texbld.utils.client import Client
 
 from texbld.utils.fs import ImageFsBrowser
 
@@ -13,7 +14,7 @@ http = urllib3.PoolManager()
 
 
 @dataclass
-class GitHubClient:
+class GitHubClient(Client):
     owner: str
     repository: str
     revision: str

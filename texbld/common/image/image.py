@@ -28,6 +28,9 @@ class Image(ABC):
     def package_dir(self) -> str:
         pass
 
+    def copy_to_builds(self):
+        pass
+
     def serialized(self) -> 'dict':
         d = self.__dict__.copy()
         d['class'] = self.__class__.__name__
@@ -104,6 +107,9 @@ class GitHubImage(Image):
     def package_dir(self) -> str:
         return self.client.browser.path
 
+    def copy_to_builds(self):
+        self.client.copy_to_builds(self)
+
 
 @dataclass(order=True)
 class LocalImage(Image):
@@ -131,3 +137,6 @@ class LocalImage(Image):
 
     def package_dir(self) -> str:
         return self.client.browser.path
+
+    def copy_to_builds(self):
+        self.client.copy_to_builds(self)

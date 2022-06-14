@@ -25,6 +25,7 @@ RUN apk update
 RUN apk add pandoc cowsay
 COPY script.sh /s1.sh
 COPY script2.sh /s2.sh
+COPY directory/directory2/file.txt /usr/share/file.txt
 RUN cowsay 'hello'
 RUN cowsay 'world'"""
     assert almost_eq_str(generate_dockerfile(x), result)

@@ -21,6 +21,7 @@ docker = "alpine"
 [files]
 "script.sh" = "/s1.sh"
 "script2.sh" = "/s2.sh"
+"directory/directory2/file.txt" = "/usr/share/file.txt"
 
 [project.files]
 "main.md" = "main.md"

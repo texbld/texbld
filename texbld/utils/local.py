@@ -2,13 +2,13 @@ from dataclasses import dataclass, field
 import os
 import shutil
 from texbld.common.directory import LOCALPACKAGES_DIR, PACKAGE_CACHE_DIR
+from texbld.utils.client import Client
 import texbld.utils.fs as fs
 from texbld.utils.fs import ImageFsBrowser
-from texbld.common.exceptions import FsNotFound
 
 
 @dataclass
-class LocalClient:
+class LocalClient(Client):
     # it's stuff from your local fs, so no sha256 needed.
     name: str
     config: str = "image.toml"
@@ -21,9 +21,9 @@ class LocalClient:
             path=os.path.join(LOCALPACKAGES_DIR, self.name), config=self.config
         )
         self.cache_path = os.path.join(PACKAGE_CACHE_DIR, f"{self.name}-{self.browser.hashed}")
-        self.copy()
+        self.unpack()
 
-    def copy(self):
+    def unpack(self):
         # only do if there is a hash mismatch.
         if os.path.isdir(self.cache_path) and fs.hash_dir(self.cache_path) != self.browser.hashed:
             shutil.rmtree(self.cache_path)
