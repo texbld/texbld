@@ -31,6 +31,7 @@ def test_image_hash_nomatch():
         install="apk add", update="apk update", inherit=None)
     y = SourceImage(
         name="hello", packages=["biber"],
+        # the colon is missing here.
         setup=["curl https//github.com"],
         files={},
         project_files={},
