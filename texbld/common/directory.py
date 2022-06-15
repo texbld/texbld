@@ -23,5 +23,4 @@ dirs = [
 ]
 
 for d in dirs:
-    if not os.path.isdir(d):
-        os.makedirs(d)
+    os.makedirs(d, exist_ok=True)
