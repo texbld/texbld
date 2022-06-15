@@ -8,7 +8,9 @@ if TYPE_CHECKING:
 
 
 def build_image(image: 'Image'):
+    print(f"Copying {image.docker_image_name()}...")
     image.copy_to_builds()
+    print(f"Building {image.docker_image_name()}...")
     dockerclient.images.build(path=image.build_dir(), tag=image.docker_image_name(), quiet=False)
 
 

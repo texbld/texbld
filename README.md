@@ -25,3 +25,11 @@ Windows, and its native Linux).
 
 - Project configurations at `$PROJECT/texbld.toml`
 - Personal image configurations at `$XDG_CONFIG_DIR/texbld/images/$name.toml`
+
+# TODO
+
+- [x] Dockerfile generation
+- [x] Building out docker images from a dependency chain
+- [ ] Write Project Parsers
+- [ ] Tests for generating project
+- [ ] Scaffolders for a project

@@ -30,3 +30,8 @@ class NoVersionSpecified(Exception):
 # contains the list of images that have dependency cycles.
 class DependencyCycle(Exception):
     pass
+
+
+# command not found for a project
+class CommandNotFound(Exception):
+    pass
