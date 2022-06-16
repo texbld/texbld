@@ -24,6 +24,10 @@ class Project:
         container = dockerclient.containers.create(self.image.docker_image_name(),
                                                    volumes={self.directory: {'bind': '/texbld', 'mode': 'rw'}},
                                                    remove=True)
-        container.exec_run(
-            command=["sh", "-c", self.commands.get(command_name)],
+        print(f"Running {self.image.docker_image_name()}...")
+        _, stream = container.exec_run(
+            cmd=["sh", "-c", self.commands.get(command_name)],
+            stream=True
         )
+        for data in stream:
+            print(data.decode())
