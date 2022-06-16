@@ -13,8 +13,8 @@ if TYPE_CHECKING:
 
 def generate_dockerfile(image: 'Image') -> str:
     source, dr = image.get_source(), image.package_dir()
-    for src, dest in source.files.items():
-        src = os.path.join(dr, src)
+    for src, _ in source.files.items():
+        src = os.path.join(dr, *src.split('/'))
         if not os.path.exists(src):
             raise FsNotFound(src)
 

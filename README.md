@@ -30,6 +30,7 @@ Windows, and its native Linux).
 
 - [x] Dockerfile generation
 - [x] Building out docker images from a dependency chain
-- [ ] Write Project Parsers
+- [x] Write Project Parsers
 - [ ] Tests for generating project
+- [ ] Revert images back into toml files.
 - [ ] Scaffolders for a project
