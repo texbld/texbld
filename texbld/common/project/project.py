@@ -12,7 +12,8 @@ class Project:
     version: str
     image: Image
     commands: 'dict[str, str]'
-    directory: str
+    # should be absolute path
+    directory: str = ""
 
     def build(self):
         build_dockerimage(Solver(self.image))
@@ -20,8 +21,9 @@ class Project:
     def run(self, command_name: str):
         if command_name not in self.commands:
             raise CommandNotFound(command_name)
-        dockerclient.containers.run(
-            self.image.docker_image_name(),
-            volumes={self.directory: {'bind': '/texbld', 'mode': 'rw'}},
-            command=self.commands.get(command_name),
-            remove=True)
+        container = dockerclient.containers.create(self.image.docker_image_name(),
+                                                   volumes={self.directory: {'bind': '/texbld', 'mode': 'rw'}},
+                                                   remove=True)
+        container.exec_run(
+            command=["sh", "-c", self.commands.get(command_name)],
+        )
