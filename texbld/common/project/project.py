@@ -8,8 +8,7 @@ from texbld.docker.client import dockerclient
 
 @dataclass
 class Project:
-    title: str
-    version: str
+    name: str
     image: Image
     commands: 'dict[str, str]'
     # should be absolute path

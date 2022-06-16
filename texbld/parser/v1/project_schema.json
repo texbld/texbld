@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "image": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "docker": { "type": "string" }
+          },
+          "required": ["docker"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "github": {
+              "type": "object",
+              "properties": {
+                "owner": { "type": "string" },
+                "repository": { "type": "string" },
+                "revision": { "type": "string" },
+                "sha256": { "type": "string" },
+                "config": { "type": "string" }
+              },
+              "required": ["owner", "repository", "revision"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["github"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "local": {
+              "oneOf": [
+                { "type": "string" },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "config": { "type": "string" }
+                  },
+                  "required": ["name", "config"],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": ["local"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "commands": {
+      "type": "object"
+    }
+  },
+  "required": ["name", "version", "image"],
+  "additionalProperties": false
+}
