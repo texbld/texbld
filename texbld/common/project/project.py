@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 from texbld.common.exceptions import CommandNotFound
 from texbld.common.image import Image
 from texbld.common.solver import Solver
+from texbld.config import LATEST_CONFIG_VERSION
 from texbld.docker.build import build as build_dockerimage
 from texbld.docker.client import dockerclient
 
@@ -35,7 +36,7 @@ class Project:
         _, dct = self.image.project_dict()
         return dict(
             name=self.name,
-            version="1",
+            version=LATEST_CONFIG_VERSION,
             image=dct,
             commands=self.commands
         )

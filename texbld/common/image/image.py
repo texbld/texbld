@@ -5,6 +5,7 @@ import os
 from docker.errors import ImageNotFound
 from texbld.common.directory import BUILD_CACHE_DIR
 from texbld.common.exceptions import DockerNotFound
+from texbld.config import LATEST_CONFIG_VERSION
 from texbld.docker.client import dockerclient
 from texbld.common.image.parse import parse_source_image
 # import like this to prevent circular imports
@@ -83,7 +84,7 @@ class DockerImage(Image):
         return None
 
     def project_dict(self) -> 'tuple[str, dict]':
-        return (1, dict(docker=self.name))
+        return (LATEST_CONFIG_VERSION, dict(docker=self.name))
 
 
 @dataclass(order=True)
@@ -129,7 +130,7 @@ class GitHubImage(Image):
         self.client.copy_to_builds(self)
 
     def project_dict(self) -> 'tuple[str, dict]':
-        return ("1", dict(github=dict(
+        return (LATEST_CONFIG_VERSION, dict(github=dict(
             owner=self.owner,
             repository=self.repository,
             revision=self.revision,
@@ -175,4 +176,4 @@ class LocalImage(Image):
         self.client.copy_to_builds(self)
 
     def project_dict(self) -> 'tuple[str, dict]':
-        return ("1", dict(local=dict(name=self.name, config=self.config)))
+        return (LATEST_CONFIG_VERSION, dict(local=dict(name=self.name, config=self.config)))

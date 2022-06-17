@@ -38,7 +38,7 @@ class ImageFsBrowser:
 
     def __post_init__(self):
         self.path = os.path.abspath(self.path)
-        self.imagepath = os.path.join(self.path, self.config)
+        self.imagepath = os.path.join(self.path, *(self.config.split('/')))
         self.name = os.path.basename(self.path)
         if not os.path.isfile(self.imagepath):
             raise FsNotFound(self.imagepath)
