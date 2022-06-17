@@ -30,3 +30,12 @@ class Project:
         )
         for data in stream:
             print(data.decode())
+
+    def project_dict(self):
+        _, dct = self.image.project_dict()
+        return dict(
+            name=self.name,
+            version="1",
+            image=dct,
+            commands=self.commands
+        )

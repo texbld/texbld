@@ -14,5 +14,4 @@ def project_toml_gen(name: str, image: 'Image') -> str:
         img.copy_to_builds()
         commands |= img.get_source().project_commands
     project = Project(name=name, image=image, commands=commands)
-    # TODO: evaluate this project object into a TOML.
-    pass
+    return toml.dumps(project.project_dict())

@@ -30,6 +30,13 @@ class Image(ABC):
     def package_dir(self) -> str:
         pass
 
+    # returns version and then a dictionary.
+    # should be implemented for the latest version.
+
+    @abstractmethod
+    def project_dict(self) -> 'tuple[str, dict]':
+        pass
+
     def build_dir(self) -> str:
         return os.path.join(BUILD_CACHE_DIR, self.docker_image_name())
 
@@ -75,6 +82,9 @@ class DockerImage(Image):
     def build_dir(self) -> str:
         return None
 
+    def project_dict(self) -> 'tuple[str, dict]':
+        return (1, dict(docker=self.name))
+
 
 @dataclass(order=True)
 class GitHubImage(Image):
@@ -118,6 +128,15 @@ class GitHubImage(Image):
     def copy_to_builds(self):
         self.client.copy_to_builds(self)
 
+    def project_dict(self) -> 'tuple[str, dict]':
+        return ("1", dict(github=dict(
+            owner=self.owner,
+            repository=self.repository,
+            revision=self.revision,
+            sha256=self.sha256,
+            config=self.config
+        )))
+
 
 @dataclass(order=True)
 class LocalImage(Image):
@@ -154,3 +173,6 @@ class LocalImage(Image):
 
     def copy_to_builds(self):
         self.client.copy_to_builds(self)
+
+    def project_dict(self) -> 'tuple[str, dict]':
+        return ("1", dict(local=dict(name=self.name, config=self.config)))

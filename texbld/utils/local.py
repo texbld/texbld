@@ -12,7 +12,7 @@ class LocalClient(Client):
     # it's stuff from your local fs, so no sha256 needed.
     name: str
     config: str = "image.toml"
-    browser: ImageFsBrowser = field(init=False)
+    browser: ImageFsBrowser = None
     cache_path: str = field(init=False)
 
     def __post_init__(self):

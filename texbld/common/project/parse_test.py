@@ -11,6 +11,9 @@ version = "1"
 # inheritance patterns (all of them are mutually exclusive)
 [image]
 docker = "alpine"
+
+[commands]
+run = "echo 'hello world'"
     """
     parse_project(source)
 

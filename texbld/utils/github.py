@@ -21,7 +21,7 @@ class GitHubClient(Client):
     sha256: str = None
     config: str = "image.toml"
     # there are times when we want to test file-fetching in git.
-    browser: ImageFsBrowser = field(init=False)
+    browser: ImageFsBrowser = None
     noconfirm: bool = field(init=False)
 
     def __post_init__(self):

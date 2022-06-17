@@ -31,6 +31,7 @@ Windows, and its native Linux).
 - [x] Dockerfile generation
 - [x] Building out docker images from a dependency chain
 - [x] Write Project Parsers
-- [ ] Tests for generating project
-- [ ] Revert images back into toml files.
+- [x] Tests for generating project
+- [x] Revert images back into toml files.
 - [ ] Scaffolders for a project
+- [ ] TeXbld CLI
