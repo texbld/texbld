@@ -75,7 +75,8 @@ class GitHubClient(Client):
             archive.extractall(path=self.decompressed_dir(), members=members)
 
     def get_browser(self) -> 'ImageFsBrowser':
-        self.browser = ImageFsBrowser(path=self.decompressed_dir(), config=self.config)
+        self.browser = ImageFsBrowser(
+            path=self.decompressed_dir(), config=self.config)
         return self.browser
 
     def read_config(self):

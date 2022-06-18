@@ -20,7 +20,8 @@ class LocalClient(Client):
         self.browser = ImageFsBrowser(
             path=os.path.join(LOCALPACKAGES_DIR, self.name), config=self.config
         )
-        self.cache_path = os.path.join(PACKAGE_CACHE_DIR, f"{self.name}-{self.browser.hashed}")
+        self.cache_path = os.path.join(
+            PACKAGE_CACHE_DIR, f"{self.name}-{self.browser.hashed}")
         self.unpack()
 
     def unpack(self):

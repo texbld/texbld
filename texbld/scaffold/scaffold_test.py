@@ -16,7 +16,8 @@ def test_1():
     if os.path.isdir(directory):
         shutil.rmtree(directory)
     scaffold(image, directory)
-    project = parse_project(open(os.path.join(directory, PROJECT_CONFIG_FILE)).read())
+    project = parse_project(
+        open(os.path.join(directory, PROJECT_CONFIG_FILE)).read())
     assert os.path.isfile(os.path.join(directory, "main.md"))
     assert os.path.isfile(os.path.join(directory, "main.tex"))
     assert os.path.isfile(os.path.join(directory, "Makefile"))

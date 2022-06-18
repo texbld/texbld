@@ -41,22 +41,31 @@ def scaffold_docker(args):
 def add_scaffold_args(parser: ArgumentParser):
     subparsers = parser.add_subparsers()
     # arguments for github
-    github = subparsers.add_parser('github', help='Use a TeXbld image from GitHub', aliases=['gh', 'g'])
+    github = subparsers.add_parser(
+        'github', help='Use a TeXbld image from GitHub', aliases=['gh', 'g'])
     github.set_defaults(func=scaffold_github)
     github.add_argument('owner', help='owner of the GitHub repository')
     github.add_argument('repository', help='GitHub repository name')
     github.add_argument('directory', help='Directory to use while scaffolding')
-    github.add_argument('--rev', '-r', default='master', help='commit of the repository to use')
-    github.add_argument('--sha256', '-s', default=None, help='sha256 of the tarball (can be automatically generated)')
-    github.add_argument('--config', '-c', default='image.toml', help='where the image configuration resides')
+    github.add_argument('--rev', '-r', default='master',
+                        help='commit of the repository to use')
+    github.add_argument('--sha256', '-s', default=None,
+                        help='sha256 of the tarball (can be automatically generated)')
+    github.add_argument('--config', '-c', default='image.toml',
+                        help='where the image configuration resides')
     # arguments for local
-    local = subparsers.add_parser('local', help='Use a local TeXbld image', aliases=['l'])
+    local = subparsers.add_parser(
+        'local', help='Use a local TeXbld image', aliases=['l'])
     local.set_defaults(func=scaffold_local)
-    local.add_argument('image', help=f'TeXbld local image name (relative path from {LOCALPACKAGES_DIR})')
+    local.add_argument(
+        'image', help=f'TeXbld local image name (relative path from {LOCALPACKAGES_DIR})')
     local.add_argument('directory', help='Directory to use while scaffolding')
-    local.add_argument('--config', '-c', default='image.toml', help='where the image configuration resides')
+    local.add_argument('--config', '-c', default='image.toml',
+                       help='where the image configuration resides')
     # arguments for docker
-    fromdocker = subparsers.add_parser('docker', help='Use a docker TeXbld image (blank)', aliases=['d'])
+    fromdocker = subparsers.add_parser(
+        'docker', help='Use a docker TeXbld image (blank)', aliases=['d'])
     fromdocker.set_defaults(func=scaffold_docker)
     fromdocker.add_argument('image', help=f'Docker image tag from registry')
-    fromdocker.add_argument('directory', help='Directory to use while scaffolding')
+    fromdocker.add_argument(
+        'directory', help='Directory to use while scaffolding')

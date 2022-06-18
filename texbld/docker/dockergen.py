@@ -3,7 +3,8 @@ from texbld.directory import BUILD_CACHE_DIR
 from typing import TYPE_CHECKING
 from jinja2 import Template
 
-dockerfile_template = Template(open(os.path.join(os.path.dirname(__file__), "dockerfile_template.jinja")).read())
+dockerfile_template = Template(open(os.path.join(
+    os.path.dirname(__file__), "dockerfile_template.jinja")).read())
 
 if TYPE_CHECKING:
     # dependency cycle otherwise

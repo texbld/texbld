@@ -11,7 +11,8 @@ def build_image(image: 'Image', cache=False):
     print(f"Copying {image.docker_image_name()}...")
     image.copy_to_builds(cache=cache)
     print(f"Building {image.docker_image_name()}...")
-    dockerclient.images.build(path=image.build_dir(), tag=image.docker_image_name(), quiet=False)
+    dockerclient.images.build(path=image.build_dir(),
+                              tag=image.docker_image_name(), quiet=False)
 
 
 def build(solver: 'Solver', cache=False):

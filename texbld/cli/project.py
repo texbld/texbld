@@ -37,7 +37,8 @@ def run(args):
 
 
 def add_build_args(parser: ArgumentParser):
-    parser.add_argument('--cache', '-c', action='store_true', help="Use cache when building")
+    parser.add_argument('--cache', '-c', action='store_true',
+                        help="Use cache when building")
     parser.set_defaults(func=build_deps)
 
 
