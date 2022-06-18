@@ -17,9 +17,9 @@ class Solver:
                 raise DependencyCycle(self.build_seq)
             else:
                 encountered_hashes.add(current_hash)
-            self.build_seq[-1].pull()
             if self.build_seq[-1].is_base():
                 break
+            self.build_seq[-1].pull()
             # everything after this step can only be done if our image actually has a dependency.
             self.build_seq.append(self.build_seq[-1].get_source().inherit)
 

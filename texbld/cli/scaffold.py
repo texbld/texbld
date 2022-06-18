@@ -14,7 +14,6 @@ http = urllib3.PoolManager()
 def scaffold_github(args):
     api_url = f"https://api.github.com/repos/{args.owner}/{args.repository}/commits/{args.rev}"
     res = requests.get(api_url)
-    print(res.status_code)
     if res.status_code != 200:
         raise GitHubNotFound(api_url)
     args.rev = res.json()['sha']

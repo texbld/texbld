@@ -32,6 +32,7 @@ def build_deps(args):
 # requires command in positional.
 def run(args):
     project = search_up(os.getcwd())
+    project.image.pull()
     project.run(args.command)
 
 

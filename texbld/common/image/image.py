@@ -67,6 +67,7 @@ class DockerImage(Image):
 
     def pull(self):
         try:
+            print(f"Attempting to pull {self.name} from the registry...")
             return dockerclient.images.pull(self.name)
         except ImageNotFound:
             raise DockerNotFound(self.name)
@@ -119,7 +120,7 @@ class GitHubImage(Image):
         return d
 
     def docker_image_name(self):
-        if not hasattr(self.client, 'browser'):
+        if not self.client.browser:
             self.pull()
         return f"texbld-github-{self.repository}-{self.client.browser.hashed}-{self.source.image_hash()}"
 
@@ -149,9 +150,6 @@ class LocalImage(Image):
     def get_source(self):
         return self.source
 
-    # browse the local FS and use the corresponding image. Set self.source.
-    # TODO: implement this
-
     def pull(self) -> None:
         # pull only if we haven't pre-defined a source.
         if not self.source or not self.client:
@@ -159,7 +157,7 @@ class LocalImage(Image):
             self.source = parse_source_image(self.client.read_config())
 
     def docker_image_name(self):
-        if not hasattr(self.client, 'browser'):
+        if not self.client.browser:
             self.pull()
         return f"texbld-local-{self.name}-{self.client.browser.hashed}-{self.source.image_hash()}"
 

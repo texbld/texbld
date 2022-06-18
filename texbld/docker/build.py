@@ -19,5 +19,6 @@ def build(solver: 'Solver', cache=False):
     for image in reversed(solver.images()):
         # no need to build out a docker image from the registry.
         if image.is_base():
+            image.pull()
             continue
         build_image(image, cache=cache)
