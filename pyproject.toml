@@ -11,6 +11,14 @@ classifiers = [
     "Topic :: Software Development :: Build Tools",
     "Topic :: Software Development :: Libraries :: Python Modules"
 ]
+include = [
+    "texbld/parser/v1/image_schema.json",
+    "texbld/parser/v1/project_schema.json",
+    "texbld/docker/dockerfile_template.jinja",
+]
+exclude = [
+    "**/*_test.py"
+]
 
 [tool.poetry.scripts]
 texbld = "texbld.cli:run"
