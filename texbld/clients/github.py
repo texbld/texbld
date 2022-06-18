@@ -6,9 +6,9 @@ import shutil
 import os
 import hashlib
 import tarfile
-from texbld.utils.client import Client
+from texbld.clients.client import Client
 
-from texbld.utils.fs import ImageFsBrowser
+from texbld.clients.fs import ImageFsBrowser
 
 http = urllib3.PoolManager()
 

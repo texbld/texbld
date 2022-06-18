@@ -1,5 +1,5 @@
-from texbld.utils.fs import ImageFsBrowser
-from texbld.utils.local import LocalClient
+from texbld.clients.fs import ImageFsBrowser
+from texbld.clients.local import LocalClient
 from texbld.directory import LOCALPACKAGES_DIR
 import pytest
 import os

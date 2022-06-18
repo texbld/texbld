@@ -2,9 +2,9 @@ from dataclasses import dataclass, field
 import os
 import shutil
 from texbld.directory import LOCALPACKAGES_DIR, PACKAGE_CACHE_DIR
-from texbld.utils.client import Client
-import texbld.utils.fs as fs
-from texbld.utils.fs import ImageFsBrowser
+from texbld.clients.client import Client
+import texbld.clients.fs as fs
+from texbld.clients.fs import ImageFsBrowser
 
 
 @dataclass

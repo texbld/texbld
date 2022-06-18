@@ -10,8 +10,8 @@ from texbld.docker.client import dockerclient
 from texbld.common.image.parse import parse_source_image
 # import like this to prevent circular imports
 from texbld.common.image.sourceimage import SourceImage
-from texbld.utils.github import GitHubClient
-from texbld.utils.local import LocalClient
+from texbld.clients.github import GitHubClient
+from texbld.clients.local import LocalClient
 from abc import ABC, abstractmethod
 
 
