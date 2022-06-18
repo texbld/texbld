@@ -30,9 +30,8 @@ In order to run tests in the virtual environment, run `pytest`.
 
 ## The Local Environment
 
-Project configurations should be located at `(your project root)/texbld.toml`,
-while local image configurations should be located at
-`$XDG_CONFIG_DIR/texbld/images/$name.toml`.
+The project configuration file should be in `(project root)/texbld.toml`, while
+local image configurations should be in `$HOME/.config/texbld/`.
 
 # Pre-release TODO
 
