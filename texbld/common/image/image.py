@@ -92,7 +92,7 @@ class GitHubImage(Image):
     owner: str
     repository: str
     revision: str
-    sha256: str = None
+    sha256: str
     config: str = "image.toml"
     source: SourceImage = None
     client: GitHubClient = None

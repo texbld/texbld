@@ -37,13 +37,6 @@ def test_github():
     assert len(s.build_seq) == 2
 
 
-def test_github_2():
-    s = Solver(
-        GitHubImage(
-            owner="texbld", repository="sample-image", revision="04f2b5a50d65eeb2b42f7329c7eea37d8c880c85"))
-    assert len(s.build_seq) == 2
-
-
 def test_github_dependency():
     s = Solver(
         LocalImage(name="test_dep5"))

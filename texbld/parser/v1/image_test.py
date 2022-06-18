@@ -106,7 +106,8 @@ version = "1"
 [inherit]
 github = { owner = "owner", repository = "repository", revision = "rev", sha256 = "sha256" }
     """
-    to_source_image(source1)
+    with pytest.raises(ValidationError):
+        to_source_image(source1)
     to_source_image(source2)
 
 

@@ -48,7 +48,7 @@
                 "sha256": { "type": "string" },
                 "config": { "type": "string" }
               },
-              "required": ["owner", "repository", "revision"],
+              "required": ["owner", "repository", "revision", "sha256"],
               "additionalProperties": false
             }
           },
