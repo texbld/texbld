@@ -1,1 +1,1 @@
-from .cli import execute
+from .cli import execute, run

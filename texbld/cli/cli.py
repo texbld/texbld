@@ -16,3 +16,8 @@ add_run_args(subparsers.add_parser('run', aliases=['r'],
 def execute(cli_args: 'list[str]'):
     args = parser.parse_args(cli_args)
     args.func(args)
+
+
+def run():
+    import sys
+    execute(sys.argv[1:])
