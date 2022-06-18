@@ -33,5 +33,5 @@ Windows, and its native Linux).
 - [x] Write Project Parsers
 - [x] Tests for generating project
 - [x] Revert images back into toml files.
-- [ ] Write Tests for the scaffolders
+- [x] Write Tests for the scaffolders
 - [ ] TeXbld CLI

@@ -1,0 +1,6 @@
+template.*
+!template.tex
+!template.md
+*.docx
+*.aux
+*.log

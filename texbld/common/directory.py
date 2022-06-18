@@ -4,6 +4,7 @@ from pathlib import Path
 
 CONFIG_BASE = os.path.join(Path.home(), ".config", "texbld")
 CACHE_BASE = os.path.join(Path.home(), ".cache", "texbld")
+SCAFFOLD_TESTS = ""
 
 
 if "pytest" in sys.modules:
@@ -11,6 +12,7 @@ if "pytest" in sys.modules:
         os.path.dirname(os.path.dirname(__file__))), "test_files")
     CONFIG_BASE = os.path.join(dirname, "config")
     CACHE_BASE = os.path.join(dirname, "cache")
+    SCAFFOLD_TESTS = os.path.join(dirname, "cache", "scaffold")
 
 CONFIG_DIR = CONFIG_BASE
 LOCALPACKAGES_DIR = os.path.join(CONFIG_BASE, "packages")

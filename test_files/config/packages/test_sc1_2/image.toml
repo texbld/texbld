@@ -1,0 +1,23 @@
+name = "test_dep1_2"
+version = "1"
+
+# optional, but apk is the default.
+install = "apk add"
+update = "apk update"
+
+packages = [
+  "biber", "python3"
+]
+
+[inherit]
+local = {name = "test_sc1_1", config = "anotherconfig.toml"}
+
+[project.files]
+"template.tex" = "main.tex"
+"template.md" = "main.md"
+"Makefile" = "Makefile"
+
+[project.commands]
+compile = "pandoc main.md -o main.pdf"
+watch = "latexmk -pdf -pvc main.tex"
+clean = "rm -rf main.tex"
