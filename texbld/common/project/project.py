@@ -15,8 +15,8 @@ class Project:
     # should be absolute path
     directory: str = ""
 
-    def build(self):
-        build_dockerimage(Solver(self.image))
+    def build(self, cache=False):
+        build_dockerimage(Solver(self.image), cache=cache)
 
     def run(self, command_name: str):
         if command_name not in self.commands:

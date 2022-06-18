@@ -4,6 +4,13 @@ version = "0.1.0"
 description = "Build tool for reproducible LaTeX documents"
 authors = ["junikimm717 <junikimm717@gmail.com>"]
 license = "GPL-3.0-or-later"
+readme = "README.md"
+repository = "https://github.com/texbld/texbld"
+keywords = ["reproducibility", "docker", "LaTeX"]
+classifiers = [
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"

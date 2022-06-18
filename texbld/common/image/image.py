@@ -41,7 +41,7 @@ class Image(ABC):
     def build_dir(self) -> str:
         return os.path.join(BUILD_CACHE_DIR, self.docker_image_name())
 
-    def copy_to_builds(self):
+    def copy_to_builds(self, cache=False):
         pass
 
     def serialized(self) -> 'dict':
@@ -126,8 +126,8 @@ class GitHubImage(Image):
     def package_dir(self) -> str:
         return self.client.browser.path
 
-    def copy_to_builds(self):
-        self.client.copy_to_builds(self)
+    def copy_to_builds(self, cache=False):
+        self.client.copy_to_builds(self, cache=cache)
 
     def project_dict(self) -> 'tuple[str, dict]':
         return (LATEST_CONFIG_VERSION, dict(github=dict(
@@ -172,8 +172,8 @@ class LocalImage(Image):
     def package_dir(self) -> str:
         return self.client.browser.path
 
-    def copy_to_builds(self):
-        self.client.copy_to_builds(self)
+    def copy_to_builds(self, cache=False):
+        self.client.copy_to_builds(self, cache=cache)
 
     def project_dict(self) -> 'tuple[str, dict]':
         return (LATEST_CONFIG_VERSION, dict(local=dict(name=self.name, config=self.config)))

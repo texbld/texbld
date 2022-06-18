@@ -15,10 +15,13 @@ class Client(ABC):
     def unpack(self):
         pass
 
-    def copy_to_builds(self, image: 'Image'):
+    def copy_to_builds(self, image: 'Image', cache=False):
         dockerfile = generate_dockerfile(image)
         buildpath = image.build_dir()
         if os.path.isdir(buildpath):
+            # check if we should assume the cache
+            if cache:
+                return
             shutil.rmtree(buildpath)
         os.makedirs(buildpath)
         for src in image.get_source().files:
