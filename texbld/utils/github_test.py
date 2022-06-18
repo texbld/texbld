@@ -1,6 +1,6 @@
 import os
 from texbld.utils.github import GitHubClient
-from texbld.common.exceptions import FsNotFound, GitHubNotFound, HashMismatch
+from texbld.common.exceptions import GitHubNotFound, HashMismatch
 import pytest
 
 

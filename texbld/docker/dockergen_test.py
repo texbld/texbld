@@ -2,13 +2,12 @@ import pytest
 from texbld.common.image.image import DockerImage, LocalImage, GitHubImage
 from texbld.common.image.sourceimage import SourceImage
 from texbld.common.solver import Solver
-from texbld.common.exceptions import FsNotFound
 from texbld.docker.dockergen import generate_dockerfile
 import re
 
 
 def almost_eq_str(s1: str, s2: str):
-    regex = re.compile("\s*")
+    regex = re.compile(r"\s*")
     l1, l2 = s1.splitlines(), s2.splitlines()
     l1 = filter(lambda s: not regex.fullmatch(s), l1)
     l2 = filter(lambda s: not regex.fullmatch(s), l2)
@@ -34,5 +33,5 @@ RUN cowsay 'world'"""
 def test_2():
     # has a nonexistent file in it.
     x = Solver(LocalImage(name="test_gen2")).images()[0]
-    with pytest.raises(FsNotFound):
+    with pytest.raises(FileNotFoundError):
         generate_dockerfile(x)

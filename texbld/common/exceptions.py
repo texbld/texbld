@@ -13,11 +13,6 @@ class DockerNotFound(Exception):
     pass
 
 
-# contains the file path that was not found.
-class FsNotFound(Exception):
-    pass
-
-
 # contains a string with the undefined version.
 class NoSuchImageVersion(Exception):
     pass

@@ -1,6 +1,6 @@
 import pytest
 from texbld.common.image.image import DockerImage, GitHubImage, LocalImage
-from texbld.common.exceptions import DependencyCycle, FsNotFound
+from texbld.common.exceptions import DependencyCycle
 from texbld.common.solver import Solver
 
 
@@ -55,5 +55,5 @@ def test_github_dependency():
 
 
 def test_notfound():
-    with pytest.raises(FsNotFound):
+    with pytest.raises(FileNotFoundError):
         s = Solver(LocalImage(name="test_dep3"))

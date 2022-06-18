@@ -1,6 +1,5 @@
 import os
 from texbld.common.directory import BUILD_CACHE_DIR
-from texbld.common.exceptions import FsNotFound
 from typing import TYPE_CHECKING
 from jinja2 import Template
 
@@ -16,7 +15,7 @@ def generate_dockerfile(image: 'Image') -> str:
     for src, _ in source.files.items():
         src = os.path.join(dr, *src.split('/'))
         if not os.path.exists(src):
-            raise FsNotFound(src)
+            raise FileNotFoundError(src)
 
     data = {
         'inherits': source.inherit.docker_image_name(),

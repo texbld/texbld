@@ -3,13 +3,12 @@ import os
 import hashlib
 import shutil
 from texbld.common.directory import PACKAGE_CACHE_DIR
-from texbld.common.exceptions import FsNotFound
 
 
 # sort everything in the directory so it's in a deterministic order.
 def files_list(path: str):
     if not os.path.isdir(path):
-        raise FsNotFound(path)
+        raise FileNotFoundError(path)
     files = []
     for dirname, _, filenames in os.walk(path):
         for f in filenames:
@@ -41,7 +40,7 @@ class ImageFsBrowser:
         self.imagepath = os.path.join(self.path, *(self.config.split('/')))
         self.name = os.path.basename(self.path)
         if not os.path.isfile(self.imagepath):
-            raise FsNotFound(self.imagepath)
+            raise FileNotFoundError(self.imagepath)
         self.hashed = hash_dir(self.path)
 
     def read_config(self):
@@ -49,4 +48,4 @@ class ImageFsBrowser:
             with open(self.imagepath) as r:
                 return r.read()
         except FileNotFoundError:
-            return FsNotFound(self.imagepath)
+            return FileNotFoundError(self.imagepath)

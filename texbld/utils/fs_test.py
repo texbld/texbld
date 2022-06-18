@@ -21,10 +21,10 @@ def test_fs_2():
 
 
 def test_fs_nonexistent():
-    with pytest.raises(FsNotFound):
+    with pytest.raises(FileNotFoundError):
         l = LocalClient(name="test_fs_nonexistent")
 
 
 def test_fs_no_imagetoml():
-    with pytest.raises(FsNotFound):
+    with pytest.raises(FileNotFoundError):
         l = LocalClient(name="test_fs_no_imagetoml")
