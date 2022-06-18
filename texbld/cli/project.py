@@ -41,5 +41,5 @@ def add_build_args(parser: ArgumentParser):
 
 
 def add_run_args(parser: ArgumentParser):
-    parser.add_argument('command', required=True)
+    parser.add_argument('command')
     parser.set_defaults(func=run)
