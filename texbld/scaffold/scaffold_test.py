@@ -37,5 +37,5 @@ def test_scaffold_exists():
 def test_scaffold_nofile():
     directory = os.path.join(SCAFFOLD_TESTS, "scaffold_nofile")
     image = LocalImage(name="test_sc2")
-    with pytest.raises(FileExistsError):
+    with pytest.raises(FileNotFoundError):
         scaffold(image, directory)

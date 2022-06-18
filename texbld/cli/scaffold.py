@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 import json
+import requests
 
 import urllib3
 from texbld.common.exceptions import GitHubNotFound
@@ -12,12 +13,12 @@ http = urllib3.PoolManager()
 
 def scaffold_github(args):
     api_url = f"https://api.github.com/repos/{args.owner}/{args.repository}/commits/{args.rev}"
-    with http.request('GET', api_url) as res:
-        if res.status == 404:
-            raise GitHubNotFound(f'https://github.com/{args.owner}/{args.repository}/commits/{args.rev}')
-        data = json.loads(res.data.decode('utf-8'))
-        args.rev = data['sha']
-        print(f'Got revision {args.rev} from the GitHub API')
+    res = requests.get(api_url)
+    print(res.status_code)
+    if res.status_code != 200:
+        raise GitHubNotFound(api_url)
+    args.rev = res.json()['sha']
+    print(f'Got revision {args.rev} from the GitHub API')
     if args.sha256 is None:
         image = GitHubImage(owner=args.owner, repository=args.repository,
                             revision=args.rev, sha256=args.sha256, config=args.config)
@@ -51,10 +52,12 @@ def add_scaffold_args(parser: ArgumentParser):
     github.add_argument('--config', '-c', default='image.toml', help='where the image configuration resides')
     # arguments for local
     local = subparsers.add_parser('local', help='Use a local TeXbld image', aliases=['l'])
+    local.set_defaults(func=scaffold_local)
     local.add_argument('image', help=f'TeXbld local image name (relative path from {LOCALPACKAGES_DIR})')
     local.add_argument('directory', help='Directory to use while scaffolding')
     local.add_argument('--config', '-c', default='image.toml', help='where the image configuration resides')
     # arguments for docker
     fromdocker = subparsers.add_parser('docker', help='Use a docker TeXbld image (blank)', aliases=['d'])
+    fromdocker.set_defaults(func=scaffold_docker)
     fromdocker.add_argument('image', help=f'Docker image tag from registry')
     fromdocker.add_argument('directory', help='Directory to use while scaffolding')

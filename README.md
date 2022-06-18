@@ -32,14 +32,3 @@ In order to run tests in the virtual environment, run `pytest`.
 
 The project configuration file should be in `(project root)/texbld.toml`, while
 local image configurations should be in `$HOME/.config/texbld/`.
-
-# Pre-release TODO
-
-- [x] Dockerfile generation
-- [x] Building out docker images from a dependency chain
-- [x] Write Project Parsers
-- [x] Tests for generating project
-- [x] Revert images back into toml files.
-- [x] Write Tests for the scaffolders
-- [x] TeXbld CLI
-- [ ] TeXbld CLI Tests

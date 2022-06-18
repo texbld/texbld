@@ -36,10 +36,10 @@ def run(args):
 
 
 def add_build_args(parser: ArgumentParser):
-    parser.add_argument('--cache', '-c', action='store_true')
+    parser.add_argument('--cache', '-c', action='store_true', help="Use cache when building")
     parser.set_defaults(func=build_deps)
 
 
 def add_run_args(parser: ArgumentParser):
-    parser.add_argument('command')
+    parser.add_argument('command', help="Command to run")
     parser.set_defaults(func=run)

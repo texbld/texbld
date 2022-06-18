@@ -13,6 +13,7 @@ if "pytest" in sys.modules:
     CONFIG_BASE = os.path.join(dirname, "config")
     CACHE_BASE = os.path.join(dirname, "cache")
     SCAFFOLD_TESTS = os.path.join(dirname, "cache", "scaffold")
+    os.makedirs(SCAFFOLD_TESTS, exist_ok=True)
 
 CONFIG_DIR = CONFIG_BASE
 LOCALPACKAGES_DIR = os.path.join(CONFIG_BASE, "packages")

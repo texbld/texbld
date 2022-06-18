@@ -21,14 +21,11 @@ class Project:
     def run(self, command_name: str):
         if command_name not in self.commands:
             raise CommandNotFound(command_name)
-        container = dockerclient.containers.create(self.image.docker_image_name(),
-                                                   volumes={self.directory: {'bind': '/texbld', 'mode': 'rw'}},
-                                                   remove=True)
         print(f"Running {self.image.docker_image_name()}...")
-        _, stream = container.exec_run(
-            cmd=["sh", "-c", self.commands.get(command_name)],
-            stream=True
-        )
+        stream = dockerclient.containers.run(
+            self.image.docker_image_name(),
+            volumes={self.directory: {'bind': '/texbld', 'mode': 'rw'}},
+            command=["sh", "-c", self.commands.get(command_name)], stream=True, remove=True)
         for data in stream:
             print(data.decode())
 
