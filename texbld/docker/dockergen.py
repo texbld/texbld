@@ -1,5 +1,5 @@
 import os
-from texbld.common.directory import BUILD_CACHE_DIR
+from texbld.directory import BUILD_CACHE_DIR
 from typing import TYPE_CHECKING
 from jinja2 import Template
 

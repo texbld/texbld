@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import os
 import shutil
-from texbld.common.directory import BUILD_CACHE_DIR
+from texbld.directory import BUILD_CACHE_DIR
 from typing import TYPE_CHECKING
 
 from texbld.docker.dockergen import generate_dockerfile

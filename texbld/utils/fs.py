@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 import os
 import hashlib
 import shutil
-from texbld.common.directory import PACKAGE_CACHE_DIR
+from texbld.directory import PACKAGE_CACHE_DIR
 
 
 # sort everything in the directory so it's in a deterministic order.

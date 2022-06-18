@@ -1,6 +1,6 @@
 from texbld.utils.fs import ImageFsBrowser
 from texbld.utils.local import LocalClient
-from texbld.common.directory import LOCALPACKAGES_DIR
+from texbld.directory import LOCALPACKAGES_DIR
 import pytest
 import os
 from texbld.common.exceptions import *

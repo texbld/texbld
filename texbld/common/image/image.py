@@ -3,7 +3,7 @@ import hashlib
 import json
 import os
 from docker.errors import ImageNotFound
-from texbld.common.directory import BUILD_CACHE_DIR
+from texbld.directory import BUILD_CACHE_DIR
 from texbld.common.exceptions import DockerNotFound
 from texbld.config import LATEST_CONFIG_VERSION
 from texbld.docker.client import dockerclient

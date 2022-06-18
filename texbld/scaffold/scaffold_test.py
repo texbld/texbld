@@ -3,7 +3,7 @@ import os
 import shutil
 
 import pytest
-from texbld.common.directory import SCAFFOLD_TESTS
+from texbld.directory import SCAFFOLD_TESTS
 from texbld.common.image.image import LocalImage
 from texbld.common.project.parse import parse_project
 from texbld.config import PROJECT_CONFIG_FILE

@@ -1,7 +1,7 @@
 import os
 from texbld.common.image.image import LocalImage
 from texbld.common.solver import Solver
-from texbld.common.directory import BUILD_CACHE_DIR
+from texbld.directory import BUILD_CACHE_DIR
 
 
 def test_correct():
