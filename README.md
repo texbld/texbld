@@ -1,12 +1,12 @@
 # texbld
 
 Although we expect LaTeX compilation to be a declarative process (source to
-PDF), the compilations for large projects eventually require external programs
-and dependencies that can't just be installed in a new computer. For example, a
-compilation step might require running a script written in haskell, piping that
-output into pandoc, then putting everything into a LaTeX file for compilation
-with `pdflatex`. How will one ever get around to installing all of those
-programs in a production system, which should never break?
+PDF), the compilations for large projects eventually require a large number of
+custom external programs and dependencies. For example, a compilation step might
+require running a script written in haskell, piping that output into pandoc,
+then putting everything into a LaTeX file for compilation with `pdflatex`. How
+will one ever get around to installing all of those programs (ESPECIALLY the
+pesky ghc dependencies) in a production system, which should never break?
 
 Furthermore, different LaTeX distributions will have ever so slightly different
 outputs (especially when working with biblatex), which is an issue for
@@ -17,7 +17,7 @@ The first take on these problems was
 dependency issues, it suffers from the various fragility and reproducibility
 issues that come with using pre-built docker images. Furthermore, because of its
 design, these images were forced to be monolithic, bloated, and ultimately
-inflexible. Each build should have exactly the dependencies that it requires,
+inflexible. Each build should have exactly the dependencies that it requires
 and nothing more!
 
 `texbld` aims to solve these problems by providing an environment where build images
