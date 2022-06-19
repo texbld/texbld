@@ -1,10 +1,6 @@
 import os
 from texbld.directory import BUILD_CACHE_DIR
 from typing import TYPE_CHECKING
-from jinja2 import Template
-
-dockerfile_template = Template(open(os.path.join(
-    os.path.dirname(__file__), "dockerfile_template.jinja")).read())
 
 if TYPE_CHECKING:
     # dependency cycle otherwise
@@ -26,4 +22,16 @@ def generate_dockerfile(image: 'Image') -> str:
         'files': source.files,
         'setup': source.setup,
     }
-    return dockerfile_template.render(**data)
+    return render(data)
+
+
+def render(d: 'dict') -> 'str':
+    strings = [f'FROM {d["inherits"]}', 'WORKDIR /texbld']
+    if len(d.get('packages', [])):
+        strings.append(f'RUN {d["update"]}')
+        strings.append(f'RUN {d["install"]} {" ".join(d["packages"])}')
+    for source, target in d['files'].items():
+        strings.append(f'COPY {source} {target}')
+    for command in d['setup']:
+        strings.append(f'RUN {command}')
+    return "\n".join(strings)

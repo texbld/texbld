@@ -2,10 +2,12 @@ import argparse
 from texbld.cli.project import add_build_args, add_run_args
 
 from texbld.cli.scaffold import add_scaffold_args
+from texbld.config import VERSION
 
 parser = argparse.ArgumentParser(
     prog="texbld", description="A dockerized build tool for paper compilation")
 parser.set_defaults(func=lambda _: parser.print_help())
+parser.add_argument('--version', '-v', action='version', version=f'texbld {VERSION}')
 subparsers = parser.add_subparsers()
 
 add_scaffold_args(subparsers.add_parser('generate', aliases=[

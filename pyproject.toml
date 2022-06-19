@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "texbld"
 version = "0.1.0"
-description = "Build tool for reproducible LaTeX documents"
+description = "A dockerized build tool for paper compilation"
 authors = ["junikimm717 <junikimm717@gmail.com>"]
 license = "GPL-3.0-or-later"
 readme = "README.md"
@@ -14,7 +14,6 @@ classifiers = [
 include = [
     "texbld/parser/v1/image_schema.json",
     "texbld/parser/v1/project_schema.json",
-    "texbld/docker/dockerfile_template.jinja",
 ]
 exclude = [
     "**/*_test.py"
@@ -27,7 +26,6 @@ texbld = "texbld.cli:run"
 python = "^3.9"
 docker = "^5.0.3"
 jsonschema = "^4.5.1"
-Jinja2 = "^3.1.2"
 requests = "^2.28.0"
 
 [tool.poetry.dev-dependencies]
