@@ -4,9 +4,9 @@ Although we expect LaTeX compilation to be a declarative process (source to
 PDF), the compilations for large projects eventually require a large number of
 custom external programs and dependencies. For example, a compilation step might
 require running a script written in haskell, piping that output into pandoc,
-then putting everything into a LaTeX file for compilation with `pdflatex`. How
-will one ever get around to installing all of those programs (ESPECIALLY the
-pesky ghc dependencies) in a production system, which should never break?
+then putting everything into a LaTeX file for compilation with `pdflatex`. Good
+luck installing all of those programs (ESPECIALLY the pesky ghc dependencies) in
+a production system!
 
 Furthermore, different LaTeX distributions will have ever so slightly different
 outputs (especially when working with biblatex), which is an issue for
@@ -46,14 +46,3 @@ In order to run tests in the virtual environment, run `pytest`.
 
 The project configuration file should be in `(project root)/texbld.toml`, while
 local image configurations should be in `$HOME/.config/texbld/packages`.
-
-## TODO
-
-- [ ] Documentation at texbld.github.io
-
-### Possible new Features
-
-- [ ] Alias system in `~/.config/texbld/aliases.toml`
-- [ ] Testing that an image builds properly without creating a project.
-- [ ] Automatic package manager deduction in a v2 sourceimage parser
-- Creating a custom registry? (Not likely due to stability issues)
