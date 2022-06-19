@@ -1,0 +1,35 @@
+# name (REQUIRED) - not used much, only for the docker image name
+name = "image_name"
+# config version (REQUIRED)
+version = "1"
+
+
+# package manager command for installing packages (apk is default)
+install = "apk add"
+# package manager command for updating a package manager repository (apk is default)
+update = "apk update"
+# packages to install (according to the package manager)
+packages = [ "texlive", "biblatex" ]
+
+
+# The three possibilities below are mutually exclusive. (REQUIRED)
+[inherit]
+docker = "alpine:latest"
+# github = { owner = "owner", repository = "repository", config = "path of the configuration toml file", revision="repository revision", sha256="tarball sha256" }
+# local = { name = "local package name", config = "path of the configuration toml file" }
+
+
+# files to be copied into docker
+# The working directory is /texbld (but that directory is hidden), so use absolute paths
+[files]
+# "source file path" = "destination path"
+
+
+# files to be copied into the source project
+[project.files]
+# "source file path" = "destination path"
+
+
+# commands for the project (invoked with `texbld run $COMMAND`)
+[project.commands]
+# in the form "command name" = "command to execute in the container"

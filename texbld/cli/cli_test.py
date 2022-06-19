@@ -47,6 +47,18 @@ def test_docker():
     assert os.path.isfile(os.path.join(dr, "texbld.toml"))
 
 
+def test_image_1():
+    os.chdir(SCAFFOLD_TESTS)
+    dr = os.path.join(SCAFFOLD_TESTS, "cli_image_1")
+    if os.path.isdir(dr):
+        shutil.rmtree(dr)
+    args = 'generate image cli_image_1'
+    execute(args.split())
+    assert len(os.listdir(dr)) == 1
+    assert os.path.isfile(os.path.join(dr, "image.toml"))
+    assert "cli_image_1" in open(os.path.join(dr, "image.toml")).read()
+
+
 def test_local_full():
     os.chdir(SCAFFOLD_TESTS)
     dr = os.path.join(SCAFFOLD_TESTS, "cli_local_1")

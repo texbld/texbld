@@ -7,7 +7,8 @@ from texbld.directory import SCAFFOLD_TESTS
 from texbld.common.image.image import LocalImage
 from texbld.common.project.parse import parse_project
 from texbld.config import PROJECT_CONFIG_FILE
-from texbld.scaffold.scaffold import scaffold
+from texbld.scaffold.scaffold import scaffold_project
+from texbld.common.image.parse import parse_source_image
 
 
 def test_1():
@@ -15,7 +16,7 @@ def test_1():
     directory = os.path.join(SCAFFOLD_TESTS, "scaffold_1")
     if os.path.isdir(directory):
         shutil.rmtree(directory)
-    scaffold(image, directory)
+    scaffold_project(image, directory)
     project = parse_project(
         open(os.path.join(directory, PROJECT_CONFIG_FILE)).read())
     assert os.path.isfile(os.path.join(directory, "main.md"))
@@ -32,7 +33,7 @@ def test_scaffold_exists():
     directory = os.path.join(SCAFFOLD_TESTS, "scaffold_exists")
     os.makedirs(directory, exist_ok=True)
     with pytest.raises(FileExistsError):
-        scaffold(image, directory)
+        scaffold_project(image, directory)
 
 
 def test_scaffold_nofile():
@@ -41,4 +42,9 @@ def test_scaffold_nofile():
     if os.path.isdir(directory):
         shutil.rmtree(directory)
     with pytest.raises(FileNotFoundError):
-        scaffold(image, directory)
+        scaffold_project(image, directory)
+
+
+def test_example_image_works():
+    path = os.path.join(os.path.dirname(__file__), "sample_image", "image.toml")
+    parse_source_image(open(path).read())
