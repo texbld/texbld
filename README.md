@@ -34,6 +34,11 @@ other people in their own projects. _Extensive Documentation will be released in
 
 Images can be inherited from packages in the local filesystem, GitHub, or Docker.
 
+## Installation
+
+The project is live on [pypi](https://pypi.org/project/texbld/).
+Run `pip install texbld`.
+
 ## Setting Up This Project
 
 This project uses poetry as its dependency manager. Simply run `poetry install`

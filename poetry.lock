@@ -258,7 +258,7 @@ use_chardet_on_py3 = ["chardet (>=3.0.2,<5)"]
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
@@ -299,7 +299,7 @@ test = ["websockets"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "5e43544a4d8a15bb435a8b5bf1cd8599a7c66ef451685698b12ef3b8a6cf59da"
+content-hash = "b9960e25ec22604640804fc046d87310f84805c043c01fb5fda8460d1e4755cb"
 
 [metadata.files]
 atomicwrites = [
