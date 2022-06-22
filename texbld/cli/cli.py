@@ -1,4 +1,5 @@
 import argparse
+from texbld.cli.validate import add_validate_args
 from texbld.cli.project import add_build_args, add_run_args
 
 from texbld.cli.scaffold import add_scaffold_args
@@ -16,6 +17,7 @@ add_build_args(subparsers.add_parser('build', aliases=[
                'b'], help="Build the necessary images for a TeXbld project"))
 add_run_args(subparsers.add_parser('run', aliases=['r'],
              help="Run a script in the corresponding TeXbld docker container"))
+add_validate_args(subparsers.add_parser('validate', aliases=['v'], help="Run validations"))
 
 
 def execute(cli_args: 'list[str]'):

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "texbld"
-version = "0.1.1"
+version = "0.2.0"
 description = "A dockerized build tool for paper compilation"
 authors = ["junikimm717 <junikimm717@gmail.com>"]
 license = "GPL-3.0-or-later"
@@ -12,8 +12,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 include = [
-    "texbld/parser/v1/image_schema.json",
-    "texbld/parser/v1/project_schema.json",
+    "texbld/parser/**/*.json",
 ]
 exclude = [
     "**/*_test.py"

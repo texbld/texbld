@@ -1,16 +1,13 @@
 import os
 import shutil
 from texbld.common.image import Image
+from texbld.scaffold.validate import validate_image_files
 
 
 def copy_image(image: Image, directory: str):
     if image.is_base():
         return
-    dr = image.package_dir()
-    for src, _ in image.get_source().project_files.items():
-        src = os.path.join(dr, *src.split('/'))
-        if not os.path.exists(src):
-            raise FileNotFoundError(src)
+    validate_image_files(image)
     for src, dest in image.get_source().project_files.items():
         oldpath = os.path.join(image.package_dir(), *src.split('/'))
         newpath = os.path.join(directory, *dest.split('/'))

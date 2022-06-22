@@ -3,7 +3,7 @@ import shutil
 import pytest
 from texbld.cli.cli import execute
 from texbld.directory import SCAFFOLD_TESTS
-from texbld.common.exceptions import CommandNotFound, GitHubNotFound
+from texbld.common.exceptions import CommandNotFound, DependencyCycle, GitHubNotFound
 
 
 def test_github_1():
@@ -57,6 +57,16 @@ def test_image_1():
     assert len(os.listdir(dr)) == 1
     assert os.path.isfile(os.path.join(dr, "image.toml"))
     assert "cli_image_1" in open(os.path.join(dr, "image.toml")).read()
+
+
+def test_local_1():
+    with pytest.raises(DependencyCycle):
+        execute('validate image test_dep2_1'.split())
+
+
+def test_local_depcycle():
+    with pytest.raises(DependencyCycle):
+        execute('validate image test_dep2_1'.split())
 
 
 def test_local_full():
