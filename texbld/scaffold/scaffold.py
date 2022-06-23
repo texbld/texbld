@@ -14,8 +14,8 @@ def scaffold_project(image: Image, directory: str):
         raise FileExistsError(directory)
     os.makedirs(directory)
     for img in reversed(Solver(image).images()):
-        print("copying image", img.package_dir())
         if not img.is_base():
+            print("copying image", img.package_dir())
             copy_image(img, directory)
     configpath = os.path.join(directory, PROJECT_CONFIG_FILE)
     with open(configpath, "w") as w:

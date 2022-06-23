@@ -2,9 +2,8 @@ import os
 from texbld.common.image import Image
 from texbld.common.solver import Solver
 
+
 # validates that an image has correct files to be scaffolded.
-
-
 def validate_image_files(image: 'Image'):
     if image.is_base():
         return
