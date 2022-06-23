@@ -1,3 +1,6 @@
+# TeXbld image scaffolded by TeXbld.
+# To see usable examples, check out https://github.com/texbld/templates.
+
 # name (REQUIRED) - not used much, only for the docker image name
 name = "image_name"
 # config version (REQUIRED)
@@ -9,8 +12,10 @@ install = "apk add"
 # package manager command for updating a package manager repository (apk is default)
 update = "apk update"
 # packages to install (according to the package manager)
-packages = [ "texlive", "biblatex" ]
+packages = [ "texlive", "make" ]
 
+# additional setup commands (executed AFTER copying files to the docker image.)
+setup = [ ]
 
 # The three possibilities below are mutually exclusive. (REQUIRED)
 [inherit]
@@ -19,7 +24,7 @@ docker = "alpine:latest"
 # local = { name = "local package name", config = "path of the configuration toml file" }
 
 
-# files to be copied into docker
+# files to be copied into the docker image
 # The working directory is /texbld (but that directory is hidden), so use absolute paths
 [files]
 # "source file path" = "destination path"
