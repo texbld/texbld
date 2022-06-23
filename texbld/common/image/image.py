@@ -12,6 +12,7 @@ from texbld.common.image.parse import parse_source_image
 from texbld.common.image.sourceimage import SourceImage
 from texbld.clients.github import GitHubClient
 from texbld.clients.local import LocalClient
+import texbld.logger as logger
 from abc import ABC, abstractmethod
 
 
@@ -67,7 +68,7 @@ class DockerImage(Image):
 
     def pull(self):
         try:
-            print(f"Attempting to pull {self.name} from the registry...")
+            logger.progress(f"Attempting to pull {self.name} from the registry...")
             return dockerclient.images.pull(self.name)
         except ImageNotFound:
             raise DockerNotFound(self.name)

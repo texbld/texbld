@@ -5,6 +5,7 @@ from texbld.config import PROJECT_CONFIG_FILE
 from texbld.scaffold.copy import copy_image
 from texbld.scaffold.project import project_toml_gen
 from texbld.common.solver import Solver
+import texbld.logger as logger
 
 
 def scaffold_project(image: Image, directory: str):
@@ -15,8 +16,9 @@ def scaffold_project(image: Image, directory: str):
     os.makedirs(directory)
     for img in reversed(Solver(image).images()):
         if not img.is_base():
-            print("copying image", img.package_dir())
+            logger.progress("copying image", img.package_dir())
             copy_image(img, directory)
+            logger.done("copied", img.package_dir())
     configpath = os.path.join(directory, PROJECT_CONFIG_FILE)
     with open(configpath, "w") as w:
         w.write(project_toml_gen(name, image))

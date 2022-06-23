@@ -7,17 +7,19 @@ from texbld.common.exceptions import GitHubNotFound
 from texbld.common.image.image import DockerImage, GitHubImage, LocalImage
 from texbld.directory import LOCALPACKAGES_DIR
 from texbld.scaffold import scaffold_project, scaffold_image
+import texbld.logger as logger
 
 http = urllib3.PoolManager()
 
 
 def scaffold_github(args):
     api_url = f"https://api.github.com/repos/{args.owner}/{args.repository}/commits/{args.rev}"
+    logger.progress("Getting Commit Information from the GitHub API...")
     res = requests.get(api_url)
     if res.status_code != 200:
         raise GitHubNotFound(api_url)
     args.rev = res.json()['sha']
-    print(f'Got revision {args.rev} from the GitHub API')
+    logger.done(f"Got revision {args.rev}")
     if args.sha256 is None:
         image = GitHubImage(owner=args.owner, repository=args.repository,
                             revision=args.rev, sha256=args.sha256, config=args.config)

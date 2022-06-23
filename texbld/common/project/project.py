@@ -5,6 +5,7 @@ from texbld.common.solver import Solver
 from texbld.config import LATEST_CONFIG_VERSION
 from texbld.docker.build import build as build_dockerimage
 from texbld.docker.client import dockerclient
+import texbld.logger as logger
 
 
 @dataclass
@@ -21,7 +22,7 @@ class Project:
     def run(self, command_name: str):
         if command_name not in self.commands:
             raise CommandNotFound(command_name)
-        print(f"Running {self.image.docker_image_name()}...")
+        logger.progress(f"Running {self.image.docker_image_name()}...")
         stream = dockerclient.containers.run(
             self.image.docker_image_name(),
             volumes={self.directory: {'bind': '/texbld', 'mode': 'rw'}},
