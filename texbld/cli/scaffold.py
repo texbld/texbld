@@ -1,24 +1,14 @@
 from argparse import ArgumentParser
-import json
-import requests
 
-import urllib3
-from texbld.common.exceptions import GitHubNotFound
 from texbld.common.image.image import DockerImage, GitHubImage, LocalImage
 from texbld.directory import LOCALPACKAGES_DIR
 from texbld.scaffold import scaffold_project, scaffold_image
 import texbld.logger as logger
-
-http = urllib3.PoolManager()
+from texbld.utils.github import get_github_rev
 
 
 def scaffold_github(args):
-    api_url = f"https://api.github.com/repos/{args.owner}/{args.repository}/commits/{args.rev}"
-    logger.progress("Getting Commit Information from the GitHub API...")
-    res = requests.get(api_url)
-    if res.status_code != 200:
-        raise GitHubNotFound(api_url)
-    args.rev = res.json()['sha']
+    args.rev = get_github_rev(args.owner, args.repository, args.rev)
     logger.done(f"Got revision {args.rev}")
     if args.sha256 is None:
         image = GitHubImage(owner=args.owner, repository=args.repository,

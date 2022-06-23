@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from texbld.cli.project import search_up
+from texbld.utils.search import search_up_project
 from texbld.common.image import LocalImage
 from texbld.common.solver import Solver
 from texbld.docker.build import build
@@ -15,7 +15,7 @@ def validate_image(args):
 
 # validate the texbld.toml file.
 def validate_project(args):
-    search_up(args.directory)
+    search_up_project(args.directory)
 
 
 def add_validate_args(parser: ArgumentParser):
