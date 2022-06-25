@@ -33,4 +33,5 @@ def scaffold_image(directory: str):
     src = os.path.join(os.path.dirname(__file__), "sample_image")
     shutil.copytree(src, directory)
     text = open(os.path.join(directory, "image.toml")).read()
-    open(os.path.join(directory, "image.toml"), "w").write(text.replace("image_name", name))
+    open(os.path.join(directory, "image.toml"), "w").write(
+        text.replace("image_name", name))

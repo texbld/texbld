@@ -64,7 +64,8 @@ def run_with_handlers(f: 'function'):
         sys.exit(1)
     except CommandNotFound as e:
         command, = e.args
-        logger.error(f"command {command} not found in the local {PROJECT_CONFIG_FILE} file.")
+        logger.error(
+            f"command {command} not found in the local {PROJECT_CONFIG_FILE} file.")
         sys.exit(1)
     except ValidationError as e:
         message = next(iter(e.args))
@@ -81,7 +82,8 @@ def run_with_handlers(f: 'function'):
     except ContainerError as e:
         code = e.exit_status
         message = e.stderr
-        logger.error(f"Container Error with status {code}: \n{str(message, 'utf-8')}")
+        logger.error(
+            f"Container Error with status {code}: \n{str(message, 'utf-8')}")
         sys.exit(1)
     except BuildError as e:
         logger.error(f"Error while building containers: {e.msg}")

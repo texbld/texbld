@@ -46,5 +46,6 @@ def test_scaffold_nofile():
 
 
 def test_example_image_works():
-    path = os.path.join(os.path.dirname(__file__), "sample_image", "image.toml")
+    path = os.path.join(os.path.dirname(__file__),
+                        "sample_image", "image.toml")
     parse_source_image(open(path).read())

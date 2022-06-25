@@ -68,7 +68,8 @@ class DockerImage(Image):
 
     def pull(self):
         try:
-            logger.progress(f"Attempting to pull {self.name} from the registry...")
+            logger.progress(
+                f"Attempting to pull {self.name} from the registry...")
             return dockerclient.images.pull(self.name)
         except ImageNotFound:
             raise DockerNotFound(self.name)
