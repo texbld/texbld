@@ -3,6 +3,7 @@ from texbld.cli.validate import add_validate_args
 from texbld.cli.project import add_build_args, add_run_args
 
 from texbld.cli.scaffold import add_scaffold_args
+from texbld.common.exceptions import run_with_handlers
 from texbld.config import VERSION
 
 parser = argparse.ArgumentParser(
@@ -27,4 +28,4 @@ def execute(cli_args: 'list[str]'):
 
 def run():
     import sys
-    execute(sys.argv[1:])
+    run_with_handlers(lambda: execute(sys.argv[1:]))

@@ -1,4 +1,4 @@
-from texbld.common.exceptions import NoSuchImageVersion, NoVersionSpecified
+from texbld.common.exceptions import NoSuchVersion, NoVersionSpecified
 from texbld.common.image.parse import parse_source_image
 import pytest
 
@@ -36,5 +36,5 @@ version = "gibberish"
 [inherit]
 docker = "alpine"
     """
-    with pytest.raises(NoSuchImageVersion):
+    with pytest.raises(NoSuchVersion):
         parse_source_image(source)

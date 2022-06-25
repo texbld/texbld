@@ -1,5 +1,5 @@
 def error(*s):
-    print("\033[91mError:\033[0m", *s)
+    print("\033[91mTeXbld Error:\033[0m", *s)
 
 
 def progress(*s):

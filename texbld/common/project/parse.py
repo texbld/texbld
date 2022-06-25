@@ -1,4 +1,4 @@
-from texbld.common.exceptions import NoSuchImageVersion, NoVersionSpecified
+from texbld.common.exceptions import NoSuchVersion, NoVersionSpecified
 from .project import Project
 import toml
 
@@ -12,4 +12,4 @@ def parse_project(source: str) -> 'Project':
         return v1.to_project(source)
     # add later versions.
     else:
-        raise NoSuchImageVersion(tomlobj["version"])
+        raise NoSuchVersion(tomlobj["version"])

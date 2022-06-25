@@ -1,4 +1,4 @@
-from texbld.common.exceptions import NoSuchImageVersion, NoVersionSpecified
+from texbld.common.exceptions import NoSuchVersion, NoVersionSpecified
 import toml
 from typing import TYPE_CHECKING
 
@@ -14,4 +14,4 @@ def parse_source_image(source: str) -> 'SourceImage':
         return v1.to_source_image(source)
     # add later versions.
     else:
-        raise NoSuchImageVersion(tomlobj["version"])
+        raise NoSuchVersion(tomlobj["version"])

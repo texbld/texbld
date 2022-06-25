@@ -4,3 +4,4 @@
 
 - Validation commands added
 - Custom logging added (pretty basic tho)
+- Error handling added
