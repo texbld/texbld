@@ -9,7 +9,6 @@ from texbld.utils.github import get_github_rev
 
 def scaffold_github(args):
     args.rev = get_github_rev(args.owner, args.repository, args.rev)
-    logger.done(f"Got revision {args.rev}")
     if args.sha256 is None:
         image = GitHubImage(owner=args.owner, repository=args.repository,
                             revision=args.rev, sha256=args.sha256, config=args.config)
