@@ -3,8 +3,9 @@ import hashlib
 import json
 import os
 from docker.errors import ImageNotFound
+from toml import TomlDecodeError
 from texbld.directory import BUILD_CACHE_DIR
-from texbld.common.exceptions import DockerNotFound
+from texbld.common.exceptions import DockerNotFound, TomlParseError
 from texbld.config import LATEST_CONFIG_VERSION
 from texbld.docker.client import dockerclient
 from texbld.common.image.parse import parse_source_image
@@ -112,8 +113,13 @@ class GitHubImage(Image):
         # pull only if we haven't pre-defined a source.
         if not self.source or not self.client:
             self.client.unpack()
-            self.client.get_browser()
-            self.source = parse_source_image(self.client.read_config())
+            imagepath = ""
+            try:
+                imagepath = self.client.get_browser().imagepath
+                self.source = parse_source_image(self.client.read_config())
+            except TomlDecodeError as e:
+                msg = e.args[0]
+                raise TomlDecodeError(msg, doc=imagepath)
 
     # re-implement serialized to get rid of client (since it isn't JSON serializable)
     def serialized(self) -> 'dict':
@@ -156,7 +162,13 @@ class LocalImage(Image):
         # pull only if we haven't pre-defined a source.
         if not self.source or not self.client:
             self.client = LocalClient(self.name, self.config)
-            self.source = parse_source_image(self.client.read_config())
+            imagepath = ""
+            try:
+                imagepath = self.client.get_browser().imagepath
+                self.source = parse_source_image(self.client.read_config())
+            except TomlDecodeError as e:
+                msg = e.args[0]
+                raise TomlParseError(msg, filename=imagepath)
 
     def docker_image_name(self):
         if not self.client.browser:

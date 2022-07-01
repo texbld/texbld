@@ -1,5 +1,6 @@
 import sys
 from jsonschema import ValidationError
+from toml import TomlDecodeError
 from texbld.config import PROJECT_CONFIG_FILE
 import texbld.logger as logger
 from docker.errors import ContainerError, BuildError
@@ -38,6 +39,11 @@ class DependencyCycle(Exception):
 # command not found for a project
 class CommandNotFound(Exception):
     pass
+
+
+class TomlParseError(Exception):
+    def __init__(self, msg: str, filename: str):
+        self.args = (msg, filename)
 
 
 def run_with_handlers(f: 'function'):
@@ -92,3 +98,6 @@ def run_with_handlers(f: 'function'):
     except BuildError as e:
         logger.error(f"Error while building containers: {e.msg}")
         sys.exit(1)
+    except TomlParseError as e:
+        msg, filename = e.args
+        logger.error(f"Toml error while parsing {filename}:\n{msg}")

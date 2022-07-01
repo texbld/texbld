@@ -33,3 +33,6 @@ class LocalClient(Client):
 
     def read_config(self):
         return self.browser.read_config()
+
+    def get_browser(self):
+        return self.browser

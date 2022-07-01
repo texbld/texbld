@@ -15,6 +15,10 @@ class Client(ABC):
     def unpack(self):
         pass
 
+    @abstractmethod
+    def get_browser(self):
+        pass
+
     def copy_to_builds(self, image: 'Image', cache=False):
         dockerfile = generate_dockerfile(image)
         buildpath = image.build_dir()

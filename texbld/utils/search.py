@@ -1,4 +1,7 @@
 import os
+
+from toml import TomlDecodeError
+from texbld.common.exceptions import TomlParseError
 from texbld.common.project.parse import parse_project
 from texbld.config import PROJECT_CONFIG_FILE
 from texbld.common.project import Project
@@ -10,9 +13,12 @@ def search_up_project(dr: str) -> 'Project':
     while True:
         projectpath = os.path.join(dr, PROJECT_CONFIG_FILE)
         if os.path.isfile(projectpath):
-            project = parse_project(open(projectpath).read())
-            project.directory = dr
-            return project
+            try:
+                project = parse_project(open(projectpath).read())
+                project.directory = dr
+                return project
+            except TomlDecodeError as e:
+                raise TomlParseError(msg=e.args[0], filename=projectpath)
         # we are at root, and there is nothing more to do.
         if os.path.dirname(dr) == dr:
             raise FileNotFoundError(searched)
