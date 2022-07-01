@@ -28,12 +28,16 @@ def test_github_2():
         execute(args.split())
 
 
-def test_github_2():
+def test_github_3():
     os.chdir(SCAFFOLD_TESTS)
-    dr = os.path.join(SCAFFOLD_TESTS, "cli_github_2")
-    args = 'generate github texbld sample-image --rev nonexistent cli_github_2'
-    with pytest.raises(GitHubNotFound):
-        execute(args.split())
+    dr = os.path.join(SCAFFOLD_TESTS, "cli_github_3")
+    if os.path.isdir(dr):
+        shutil.rmtree(dr)
+    args = 'generate github texbld sample-image --config markdown.toml cli_github_3'
+    execute(args.split())
+    assert os.path.isfile(os.path.join(dr, "main.md"))
+    assert os.path.isfile(os.path.join(dr, "texbld.toml"))
+    assert not os.path.isfile(os.path.join(dr, "main.tex"))
 
 
 def test_docker():

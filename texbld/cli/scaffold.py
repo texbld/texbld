@@ -42,7 +42,7 @@ def add_scaffold_args(parser: ArgumentParser):
     github.add_argument('owner', help='owner of the GitHub repository')
     github.add_argument('repository', help='GitHub repository name')
     github.add_argument('directory', help='Directory to use for scaffolding')
-    github.add_argument('--rev', '-r', default='master',
+    github.add_argument('--rev', '-r', default=None,
                         help='commit of the repository to use')
     github.add_argument('--sha256', '-s', default=None,
                         help='sha256 of the tarball (can be automatically generated)')
