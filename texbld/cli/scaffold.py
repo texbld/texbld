@@ -6,7 +6,8 @@ from texbld.scaffold import scaffold_project, scaffold_image
 
 
 def image_resource_type(arg: str):
-    regexes = [ImageResource.github_regex, ImageResource.docker_regex, ImageResource.local_regex]
+    regexes = [ImageResource.github_regex,
+               ImageResource.docker_regex, ImageResource.local_regex]
     for regex in regexes:
         if regex.fullmatch(arg):
             return arg
@@ -24,8 +25,10 @@ def scaffold_image_cli(args):
 
 def add_scaffold_args(parser: ArgumentParser):
     subparsers = parser.add_subparsers()
-    project = subparsers.add_parser('project', help='generate a project', aliases=['p'])
-    project.add_argument('resource', help='TeXbld image resource', type=image_resource_type)
+    project = subparsers.add_parser(
+        'project', help='generate a project', aliases=['p'])
+    project.add_argument(
+        'resource', help='TeXbld image resource', type=image_resource_type)
     project.add_argument('directory', help='Directory to use for scaffolding')
     project.add_argument('--config', '-c', default='image.toml',
                          help='where the image configuration resides')

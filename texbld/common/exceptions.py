@@ -81,7 +81,8 @@ def run_with_handlers(f: 'function'):
         f, = e.args
         if type(f) == list:
             files = '\n'.join(f)
-            logger.error(f"Could not find any of the following files:\n{files}")
+            logger.error(
+                f"Could not find any of the following files:\n{files}")
         else:
             logger.error(f"Could not find file {f}.")
         sys.exit(1)
