@@ -7,3 +7,4 @@
 - Error handling added (including for TOML errors)
 - Using Nix-inspired schemes for image names in the CLI instead of subparsers.
 - FS access security vulnerability patched
+- Utilities for pegging sha256 and revision of GitHub repositories.
