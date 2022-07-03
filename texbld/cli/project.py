@@ -1,9 +1,6 @@
 from argparse import ArgumentParser
 import os
 
-from texbld.config import PROJECT_CONFIG_FILE
-from texbld.common.project import Project
-from texbld.common.project.parse import parse_project
 from texbld.utils.search import search_up_project
 
 

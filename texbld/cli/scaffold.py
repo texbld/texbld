@@ -1,17 +1,6 @@
-from argparse import ArgumentParser, ArgumentTypeError
-from texbld.cli.resource import ImageResource
-from texbld.common.image.image import GitHubImage, LocalImage, DockerImage
-
+from argparse import ArgumentParser
+from texbld.cli.resource import ImageResource, image_resource_type
 from texbld.scaffold import scaffold_project, scaffold_image
-
-
-def image_resource_type(arg: str):
-    regexes = [ImageResource.github_regex,
-               ImageResource.docker_regex, ImageResource.local_regex]
-    for regex in regexes:
-        if regex.fullmatch(arg):
-            return arg
-    raise ArgumentTypeError('Invalid Resource Type.')
 
 
 def scaffold_project_cli(args):

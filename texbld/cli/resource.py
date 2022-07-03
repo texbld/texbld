@@ -1,7 +1,17 @@
+from argparse import ArgumentTypeError
 import re
 from texbld.common.image.image import DockerImage, GitHubImage, Image, LocalImage
 
 from texbld.utils.github import get_github_rev
+
+
+def image_resource_type(arg: str):
+    regexes = [ImageResource.github_regex,
+               ImageResource.docker_regex, ImageResource.local_regex]
+    for regex in regexes:
+        if regex.fullmatch(arg):
+            return arg
+    raise ArgumentTypeError('Invalid Resource Type.')
 
 
 class ImageResource:
