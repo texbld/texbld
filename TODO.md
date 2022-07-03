@@ -1,5 +1,7 @@
 # TODO
 
+- [ ] !SECURITY ! Prevent a project.toml from overwriting any files above the
+  project directory.
 - [x] Get the default git branch from the GitHub API.
 - [x] Include error handling for TOML parse fails.
 - [x] Use Schemes for network resources (in Nix, `github:texbld/templates`)

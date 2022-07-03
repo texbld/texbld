@@ -1,0 +1,1 @@
+unnecessary file (used to validate correctness in copying)

@@ -46,6 +46,11 @@ class TomlParseError(Exception):
         self.args = (msg, filename)
 
 
+class PermissionDenied(Exception):
+    def __init__(self, path: str):
+        self.path = path
+
+
 def run_with_handlers(f: 'function'):
     try:
         f()
@@ -102,3 +107,6 @@ def run_with_handlers(f: 'function'):
     except TomlParseError as e:
         msg, filename = e.args
         logger.error(f"Toml error while parsing {filename}:\n{msg}")
+    except PermissionDenied as e:
+        logger.error(
+            f"Prevented arbitrary filesystem access at {e.path}. The image you are using may have malicious intent.")

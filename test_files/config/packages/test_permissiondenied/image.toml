@@ -1,0 +1,31 @@
+name = "test_gen1"
+version = "1"
+
+# optional, but apk is the default.
+install = "apk add"
+update = "apk update"
+
+packages = [
+    "pandoc",
+    "cowsay"
+]
+
+setup = [
+  "cowsay 'hello'",
+  "cowsay 'world'",
+]
+
+[inherit]
+docker = "alpine"
+
+[files]
+"script.sh" = "/s1.sh"
+"script2.sh" = "/s2.sh"
+"directory/directory2/file.txt" = "/usr/share/file.txt"
+
+[project.files]
+# permission denied should be thrown
+"file.txt" = "../../hello/main.md"
+
+[project.commands]
+compile = "pandoc -o main.pdf main.md"

@@ -3,6 +3,7 @@ import os
 import shutil
 
 import pytest
+from texbld.common.exceptions import PermissionDenied
 from texbld.directory import SCAFFOLD_TESTS
 from texbld.common.image.image import LocalImage
 from texbld.common.project.parse import parse_project
@@ -49,3 +50,12 @@ def test_example_image_works():
     path = os.path.join(os.path.dirname(__file__),
                         "sample_image", "image.toml")
     parse_source_image(open(path).read())
+
+
+def test_scaffold_permissiondenied():
+    image = LocalImage(name="test_permissiondenied")
+    directory = os.path.join(SCAFFOLD_TESTS, "scaffold_permdenied")
+    if os.path.isdir(directory):
+        shutil.rmtree(directory)
+    with pytest.raises(PermissionDenied):
+        scaffold_project(image, directory)
