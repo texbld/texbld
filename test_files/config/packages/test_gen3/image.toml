@@ -1,0 +1,29 @@
+name = "test_gen3"
+version = "1"
+
+# optional, but apk is the default.
+install = "apk add"
+
+packages = [
+    "pandoc",
+    "cowsay"
+]
+
+setup = [
+  "cowsay 'hello'",
+  "cowsay 'world'",
+]
+
+[inherit]
+docker = "alpine"
+
+[files]
+"script.sh" = "/s1.sh"
+"script2.sh" = "/s2.sh"
+"directory/directory2/file.txt" = "/usr/share/file.txt"
+
+[project.files]
+"main.md" = "main.md"
+
+[project.commands]
+compile = "pandoc -o main.pdf main.md"

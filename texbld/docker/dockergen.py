@@ -28,7 +28,8 @@ def generate_dockerfile(image: 'Image') -> str:
 def render(d: 'dict') -> 'str':
     strings = [f'FROM {d["inherits"]}', 'WORKDIR /texbld']
     if len(d.get('packages', [])):
-        strings.append(f'RUN {d["update"]}')
+        if len(d['update']):
+            strings.append(f'RUN {d["update"]}')
         strings.append(f'RUN {d["install"]} {" ".join(d["packages"])}')
     for source, target in d['files'].items():
         strings.append(f'COPY {source} {target}')

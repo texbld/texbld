@@ -35,3 +35,17 @@ def test_2():
     x = Solver(LocalImage(name="test_gen2")).images()[0]
     with pytest.raises(FileNotFoundError):
         generate_dockerfile(x)
+
+
+# Doesn't have an update command
+def test_3():
+    x = Solver(LocalImage(name="test_gen3")).images()[0]
+    result = """FROM alpine
+WORKDIR /texbld
+RUN apk add pandoc cowsay
+COPY script.sh /s1.sh
+COPY script2.sh /s2.sh
+COPY directory/directory2/file.txt /usr/share/file.txt
+RUN cowsay 'hello'
+RUN cowsay 'world'"""
+    assert almost_eq_str(generate_dockerfile(x), result)
