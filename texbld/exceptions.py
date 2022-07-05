@@ -2,7 +2,7 @@ import sys
 from jsonschema import ValidationError
 from texbld.config import PROJECT_CONFIG_FILE
 import texbld.logger as logger
-from docker.errors import ContainerError, BuildError
+from docker.errors import ContainerError, BuildError, DockerException
 
 # tuple of actual and received hashes.
 
@@ -109,3 +109,8 @@ def run_with_handlers(f: 'function'):
     except PermissionDenied as e:
         logger.error(
             f"Prevented arbitrary filesystem access at {e.path}. The image you are using may have malicious intent.")
+    except DockerException as e:
+        msg, = e.args
+        logger.error(
+            msg
+        )

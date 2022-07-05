@@ -1,7 +1,7 @@
 # TODO
 
 - [x] Lazy-import the docker client
-- [ ] Error handling for docker client connect failures
+- [x] Error handling for docker client connect failures
 - [ ] Stderr project command debugging capabilities
 - [ ] Implement an install script for TeXbld
 - [ ] Allow singleton image usage for LocalImage (relative paths)
