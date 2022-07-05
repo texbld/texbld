@@ -1,7 +1,7 @@
 import os
 
 from toml import TomlDecodeError
-from texbld.common.exceptions import TomlParseError
+from texbld.exceptions import TomlParseError
 from texbld.common.project.parse import parse_project
 from texbld.config import PROJECT_CONFIG_FILE
 from texbld.common.project import Project

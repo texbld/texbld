@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from texbld.common.exceptions import DependencyCycle
+from texbld.exceptions import DependencyCycle
 from texbld.common.image import Image
 
 

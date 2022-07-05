@@ -1,5 +1,5 @@
 from texbld.directory import PACKAGE_CACHE_DIR, TARBALL_CACHE_DIR
-from texbld.common.exceptions import GitHubNotFound, HashMismatch
+from texbld.exceptions import GitHubNotFound, HashMismatch
 from dataclasses import dataclass, field
 import urllib3
 import shutil

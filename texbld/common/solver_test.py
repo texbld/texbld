@@ -1,6 +1,6 @@
 import pytest
 from texbld.common.image.image import DockerImage, GitHubImage, LocalImage
-from texbld.common.exceptions import DependencyCycle
+from texbld.exceptions import DependencyCycle
 from texbld.common.solver import Solver
 
 

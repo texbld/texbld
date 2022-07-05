@@ -3,7 +3,7 @@ import os
 import shutil
 
 import pytest
-from texbld.common.exceptions import PermissionDenied
+from texbld.exceptions import PermissionDenied
 from texbld.directory import SCAFFOLD_TESTS
 from texbld.common.image.image import LocalImage
 from texbld.common.project.parse import parse_project

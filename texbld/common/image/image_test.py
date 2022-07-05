@@ -1,6 +1,6 @@
 import pytest
 from texbld.common.image import *
-from texbld.common.exceptions import DockerNotFound
+from texbld.exceptions import DockerNotFound
 
 
 def test_image_hash_matches():

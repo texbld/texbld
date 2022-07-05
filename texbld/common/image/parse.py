@@ -1,4 +1,4 @@
-from texbld.common.exceptions import NoSuchVersion, NoVersionSpecified
+from texbld.exceptions import NoSuchVersion, NoVersionSpecified
 import toml
 from typing import TYPE_CHECKING
 

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from texbld.common.exceptions import CommandNotFound
+from texbld.exceptions import CommandNotFound
 from texbld.common.image import Image
 from texbld.common.solver import Solver
 from texbld.config import LATEST_CONFIG_VERSION

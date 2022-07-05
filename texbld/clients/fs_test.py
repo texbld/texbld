@@ -3,7 +3,7 @@ from texbld.clients.local import LocalClient
 from texbld.directory import LOCALPACKAGES_DIR
 import pytest
 import os
-from texbld.common.exceptions import *
+from texbld.exceptions import *
 
 
 def test_fs_1():

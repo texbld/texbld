@@ -1,6 +1,6 @@
 import os
 import shutil
-from texbld.common.exceptions import PermissionDenied
+from texbld.exceptions import PermissionDenied
 from texbld.common.image import Image
 from texbld.scaffold.validate import validate_image_files
 

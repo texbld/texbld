@@ -1,4 +1,4 @@
-from texbld.common.exceptions import NoSuchVersion, NoVersionSpecified
+from texbld.exceptions import NoSuchVersion, NoVersionSpecified
 from texbld.common.image.parse import parse_source_image
 import pytest
 

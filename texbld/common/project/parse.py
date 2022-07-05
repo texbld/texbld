@@ -1,4 +1,4 @@
-from texbld.common.exceptions import NoSuchVersion, NoVersionSpecified
+from texbld.exceptions import NoSuchVersion, NoVersionSpecified
 from .project import Project
 import toml
 

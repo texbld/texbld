@@ -1,4 +1,4 @@
-from texbld.common.exceptions import GitHubNotFound
+from texbld.exceptions import GitHubNotFound
 import texbld.logger as logger
 import requests
 

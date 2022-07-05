@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] Lazy-import the docker client
+- [x] Lazy-import the docker client
 - [ ] Error handling for docker client connect failures
 - [ ] Stderr project command debugging capabilities
 - [ ] Implement an install script for TeXbld

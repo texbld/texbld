@@ -3,7 +3,7 @@ import shutil
 import pytest
 from texbld.cli.cli import execute
 from texbld.directory import SCAFFOLD_TESTS
-from texbld.common.exceptions import CommandNotFound, DependencyCycle, GitHubNotFound
+from texbld.exceptions import CommandNotFound, DependencyCycle, GitHubNotFound
 
 
 def test_github_1():

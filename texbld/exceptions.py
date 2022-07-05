@@ -1,6 +1,5 @@
 import sys
 from jsonschema import ValidationError
-from toml import TomlDecodeError
 from texbld.config import PROJECT_CONFIG_FILE
 import texbld.logger as logger
 from docker.errors import ContainerError, BuildError
