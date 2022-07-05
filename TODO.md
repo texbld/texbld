@@ -1,12 +1,17 @@
 # TODO
 
-- [x] Utility for getting the SHA256 of a directory.
-- [x] !SECURITY ! Prevent a project.toml from overwriting any files above the
-      project directory.
-- [x] Get the default git branch from the GitHub API.
-- [x] Include error handling for TOML parse fails.
-- [x] Use Schemes for network resources (in Nix, `github:texbld/templates`)
+- [ ] Lazy-import the docker client
+- [ ] Error handling for docker client connect failures
+- [ ] Stderr project command debugging capabilities
+- [ ] Implement an install script for TeXbld
 - [ ] Allow singleton image usage for LocalImage (relative paths)
 - [ ] Alias system in `~/.config/texbld/aliases.toml`
-- [ ] Automatic package manager deduction in a v2 sourceimage parser
+
+## Config version 2
+
+- [ ] Automatic package manager deduction (custom ways of dealing with them)
+
+## Far
+
 - [ ] API refactor?
+- [ ] Tarball registry?
