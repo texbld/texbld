@@ -1,5 +1,3 @@
-from texbld.docker.client import dockerclient
-
 from typing import TYPE_CHECKING
 import texbld.logger as logger
 
@@ -9,6 +7,8 @@ if TYPE_CHECKING:
 
 
 def build_image(image: 'Image', cache=False):
+    from texbld.docker.client import dockerclient
+
     logger.progress(f"Copying {image.docker_image_name()}...")
     image.copy_to_builds(cache=cache)
     logger.done(f"Copied {image.docker_image_name()}")

@@ -13,7 +13,8 @@ def getsha256(resource):
         image.client.fetch()
         return (rev, image.client.getsha256())
     else:
-        raise ArgumentTypeError(f'Error: Resource {resource} is not a GitHub resource.')
+        raise ArgumentTypeError(
+            f'Error: Resource {resource} is not a GitHub resource.')
 
 
 def getsha256_cli(args):
@@ -23,5 +24,6 @@ def getsha256_cli(args):
 
 
 def add_sha_args(parser: ArgumentParser):
-    parser.add_argument('resource', type=image_resource_type, help='GitHub resource to get sha256 of')
+    parser.add_argument('resource', type=image_resource_type,
+                        help='GitHub resource to get sha256 of')
     parser.set_defaults(func=getsha256_cli)

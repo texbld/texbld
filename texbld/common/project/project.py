@@ -4,7 +4,6 @@ from texbld.common.image import Image
 from texbld.common.solver import Solver
 from texbld.config import LATEST_CONFIG_VERSION
 from texbld.docker.build import build as build_dockerimage
-from texbld.docker.client import dockerclient
 import texbld.logger as logger
 
 
@@ -20,6 +19,8 @@ class Project:
         build_dockerimage(Solver(self.image), cache=cache)
 
     def run(self, command_name: str):
+        from texbld.docker.client import dockerclient
+
         if command_name not in self.commands:
             raise CommandNotFound(command_name)
         logger.progress(f"Running {self.image.docker_image_name()}...")

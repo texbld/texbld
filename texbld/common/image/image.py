@@ -7,7 +7,6 @@ from toml import TomlDecodeError
 from texbld.directory import BUILD_CACHE_DIR
 from texbld.common.exceptions import DockerNotFound, TomlParseError
 from texbld.config import LATEST_CONFIG_VERSION
-from texbld.docker.client import dockerclient
 from texbld.common.image.parse import parse_source_image
 # import like this to prevent circular imports
 from texbld.common.image.sourceimage import SourceImage
@@ -69,6 +68,7 @@ class DockerImage(Image):
 
     def pull(self):
         try:
+            from texbld.docker.client import dockerclient
             logger.progress(
                 f"Attempting to pull {self.name} from the registry...")
             return dockerclient.images.pull(self.name)

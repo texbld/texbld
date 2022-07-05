@@ -22,7 +22,8 @@ add_run_args(subparsers.add_parser('run', aliases=['r'],
              help="Run a script in the corresponding TeXbld docker container"))
 add_validate_args(subparsers.add_parser(
     'validate', aliases=['v'], help="Run validations"))
-add_sha_args(subparsers.add_parser('getsha256', aliases=['sha'], help='Get the sha256 of a GitHub Image'))
+add_sha_args(subparsers.add_parser('getsha256', aliases=[
+             'sha'], help='Get the sha256 of a GitHub Image'))
 
 
 def execute(cli_args: 'list[str]'):
