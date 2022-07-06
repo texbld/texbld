@@ -8,41 +8,49 @@ from docker.errors import ContainerError, BuildError, DockerException
 
 
 class HashMismatch(Exception):
-    pass
+    def __init__(self, expected: str, received: str) -> None:
+        super().__init__(expected, received)
 
 
 # the github tarball url that could not be curled.
 class GitHubNotFound(Exception):
-    pass
+    def __init__(self, url: str) -> None:
+        super().__init__(url)
 
 
 # image name that couldn't be pulled.
 class DockerNotFound(Exception):
+    def __init__(self, image: str) -> None:
+        super().__init__(image)
     pass
 
 
 # contains the string with the undefined version.
 class NoSuchVersion(Exception):
-    pass
+    def __init__(self, version: str) -> None:
+        super().__init__(version)
 
 
 class NoVersionSpecified(Exception):
-    pass
+    def __init__(self) -> None:
+        super().__init__()
 
 
 # contains the list of images that have dependency cycles.
 class DependencyCycle(Exception):
-    pass
+    def __init__(self, images: list) -> None:
+        super().__init__(images)
 
 
 # command not found for a project
 class CommandNotFound(Exception):
-    pass
+    def __init__(self, command: str) -> None:
+        super().__init__(command)
 
 
 class TomlParseError(Exception):
     def __init__(self, msg: str, filename: str):
-        self.args = (msg, filename)
+        super().__init__(msg, filename)
 
 
 class PermissionDenied(Exception):

@@ -56,7 +56,7 @@ class GitHubClient(Client):
         if not self.fetch() or self.noconfirm:
             return False
         if (x := self.getsha256()) != self.sha256:
-            raise HashMismatch((x, self.sha256))
+            raise HashMismatch(x, self.sha256)
         return True
 
     def unpack(self):
