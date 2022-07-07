@@ -1,7 +1,6 @@
 # TODO
 
-- [x] Lazy-import the docker client
-- [x] Error handling for docker client connect failures
+- [ ] Nix Flake (package and devshell)
 - [ ] Stderr project command debugging capabilities
 - [ ] Implement an install script for TeXbld
 - [ ] Allow singleton image usage for LocalImage (relative paths)
