@@ -41,9 +41,19 @@ Run `pip install texbld`.
 
 ## Setting Up This Project
 
+### NixOS
+
+Running `nix-shell` **should** set up everything. Note, however, that the
+resulting poetry virtual environment will be installed in
+`~/.cache/pypoetry/virtualenvs`, so it's not completely nix-based.
+
+### Non-NixOS
+
 This project uses poetry as its dependency manager. Simply run `poetry install`
 and `poetry shell` inside the project directory, and you should land in a
 virtual environment with all of your dependencies.
+
+### Testing
 
 In order to run tests in the virtual environment, run `pytest`.
 
