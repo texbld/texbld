@@ -90,9 +90,9 @@ def run_with_handlers(f: 'function'):
         logger.error(f"Received a Validation Error: {message}")
         sys.exit(1)
     except FileNotFoundError as e:
-        f, = e.args
-        if type(f) == list:
-            files = '\n'.join(f)
+        fle, = e.args
+        if type(fle) == list:
+            files = '\n'.join(fle)
             logger.error(
                 f"Could not find any of the following files:\n{files}")
         else:
@@ -105,8 +105,10 @@ def run_with_handlers(f: 'function'):
     except ContainerError as e:
         code = e.exit_status
         message = e.stderr
+        logs = e.container.logs()
         logger.error(
-            f"Container Error with status {code}: \n{str(message, 'utf-8')}")
+            f"Container Error with status {code}:\n{str(message,'utf-8')}\n\n{logs.decode()}")
+        e.container.remove()
         sys.exit(1)
     except BuildError as e:
         logger.error(f"Error while building containers: {e.msg}")
@@ -120,5 +122,5 @@ def run_with_handlers(f: 'function'):
     except DockerException as e:
         msg, = e.args
         logger.error(
-            msg
+            str(msg)
         )

@@ -1,7 +1,7 @@
 # TODO
 
-- [ ] Nix Flake (package and devshell)
-- [ ] Stderr project command debugging capabilities (print logs on error)
+- [x] Nix stuff (package and devshell)
+- [x] Stderr project command debugging capabilities (print logs on error)
 - [ ] Implement an install script for TeXbld
 - [ ] Allow singleton image usage for LocalImage (relative paths)
 - [ ] Alias system in `~/.config/texbld/aliases.toml`

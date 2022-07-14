@@ -20,16 +20,17 @@ class Project:
 
     def run(self, command_name: str):
         from texbld.docker.client import dockerclient
-
         if command_name not in self.commands:
             raise CommandNotFound(command_name)
         logger.progress(f"Running {self.image.docker_image_name()}...")
         stream = dockerclient.containers.run(
             self.image.docker_image_name(),
             volumes={self.directory: {'bind': '/texbld', 'mode': 'rw'}},
-            entrypoint=["sh", "-c", self.commands.get(command_name)], stream=True, remove=True)
+            entrypoint=["sh", "-c", self.commands.get(command_name)], stream=True)
         for data in stream:
             print(data.decode())
+        dockerclient.containers.prune()
+        
 
     def project_dict(self):
         _, dct = self.image.project_dict()
