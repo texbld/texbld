@@ -39,6 +39,10 @@ Images can be inherited from packages in the local filesystem, GitHub, or Docker
 The project is live on [pypi](https://pypi.org/project/texbld/).
 Run `pip install texbld`.
 
+### NixOS
+
+cd into this directory and run `nix-build`.
+
 ## Setting Up This Project
 
 ### NixOS
