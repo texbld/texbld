@@ -30,7 +30,6 @@ class Project:
         for data in stream:
             print(data.decode())
         dockerclient.containers.prune()
-        
 
     def project_dict(self):
         _, dct = self.image.project_dict()

@@ -31,4 +31,5 @@ def scaffold_image(directory: str):
     os.makedirs(directory)
     src_path = os.path.join(os.path.dirname(__file__), "sample_image.toml")
     text = open(src_path).read()
-    open(os.path.join(directory, "image.toml"), "w").write(text.replace("image_name", name))
+    open(os.path.join(directory, "image.toml"), "w").write(
+        text.replace("image_name", name))
