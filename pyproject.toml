@@ -25,7 +25,7 @@ texbld = "texbld.cli:run"
 python = "^3.9"
 docker = "^5.0.3"
 jsonschema = "^4.5.1"
-requests = "^2.28.0"
+requests = "^2.27.1"
 toml = "^0.10.2"
 urllib3 = "^1.26.9"
 
