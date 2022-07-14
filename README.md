@@ -41,7 +41,9 @@ Run `pip install texbld`.
 
 ### NixOS
 
-cd into this directory and run `nix-build`.
+Check the nix expressions in the release branch and configure accordingly.
+
+In order to build the master branch, run `./build-development.sh`.
 
 ## Setting Up This Project
 
