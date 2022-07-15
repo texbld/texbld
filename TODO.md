@@ -4,7 +4,6 @@
 
 ## To Implement
 
-- [ ] Graceful shutdown (kill/remove container after sigint)
 - [ ] Implement an install script for TeXbld
 - [ ] Allow singleton image usage for LocalImage (relative paths)
 - [ ] Alias system in `~/.config/texbld/aliases.toml`

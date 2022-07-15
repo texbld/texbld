@@ -24,16 +24,18 @@ class Project:
         from texbld.docker.client import dockerclient
         if command_name not in self.commands:
             raise CommandNotFound(command_name)
-        logger.progress(f"Creating a container for {self.image.docker_image_name()}...")
+        logger.progress(
+            f"Creating a container for {self.image.docker_image_name()}...")
         container = dockerclient.containers.create(
             self.image.docker_image_name(),
             volumes={self.directory: {'bind': '/texbld', 'mode': 'rw'}},
             entrypoint=["sh", "-c", self.commands.get(command_name)],
         )
+
         def cleanup(*args):
             logger.progress('Running cleanup...')
             container.remove(force=True)
-        
+
         signal.signal(signal.SIGINT, cleanup)
         signal.signal(signal.SIGTERM, cleanup)
 
