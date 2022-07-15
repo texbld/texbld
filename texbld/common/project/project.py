@@ -5,6 +5,8 @@ from texbld.common.solver import Solver
 from texbld.config import LATEST_CONFIG_VERSION
 from texbld.docker.build import build as build_dockerimage
 import texbld.logger as logger
+import signal
+from docker.errors import NotFound
 
 
 @dataclass
@@ -23,13 +25,24 @@ class Project:
         if command_name not in self.commands:
             raise CommandNotFound(command_name)
         logger.progress(f"Running {self.image.docker_image_name()}...")
-        stream = dockerclient.containers.run(
+        container = dockerclient.containers.create(
             self.image.docker_image_name(),
             volumes={self.directory: {'bind': '/texbld', 'mode': 'rw'}},
-            entrypoint=["sh", "-c", self.commands.get(command_name)], stream=True)
-        for data in stream:
+            entrypoint=["sh", "-c", self.commands.get(command_name)],
+        )
+        def cleanup(*args):
+            container.remove(force=True)
+        
+        signal.signal(signal.SIGINT, cleanup)
+        signal.signal(signal.SIGTERM, cleanup)
+
+        container.start()
+        for data in container.attach(stream=True):
             print(data.decode())
-        dockerclient.containers.prune()
+        try:
+            container.remove(force=True)
+        except NotFound:
+            pass
 
     def project_dict(self):
         _, dct = self.image.project_dict()
