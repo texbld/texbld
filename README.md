@@ -30,20 +30,20 @@ preventing dependency modification issues.
 
 Users can specify their build image in a simple TOML file (along with associated
 files) and upload them to github, from which it can be inherited and used by
-other people in their own projects. _Extensive Documentation will be released in the future._
+other people in their own projects.
 
 Images can be inherited from packages in the local filesystem, GitHub, or Docker.
 
 ## Installation
 
 The project is live on [pypi](https://pypi.org/project/texbld/).
-Run `pip install texbld`.
+Run `pip install -U texbld`.
 
 ### NixOS
 
 Check the nix expressions in the release branch and configure accordingly.
 
-In order to build the master branch, run `./build-development.sh`.
+In order to build the master branch, run `nix-build`.
 
 ## Setting Up This Project
 

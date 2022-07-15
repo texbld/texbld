@@ -10,7 +10,7 @@ in
 pkgs.mkShell {
   buildInputs = [python_dev_packages pkgs.scc];
   shellHook = ''
-    if ! poetry env info -p; then
+    if ! poetry env info -p 2>&1 > /dev/null; then
       poetry install
     fi
     source `poetry env info -p`/bin/activate
