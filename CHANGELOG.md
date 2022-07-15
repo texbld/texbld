@@ -1,6 +1,11 @@
 # CHANGELOG
 
-## 0.2.0
+## 0.3
+
+- Container shows error logs
+- Nix expressions for development
+
+## 0.2
 
 - Validation commands added
 - Custom logging added (prettier error messages)

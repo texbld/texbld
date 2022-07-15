@@ -8,7 +8,7 @@ let
   );
 in
 pkgs.mkShell {
-  buildInputs = [python_dev_packages];
+  buildInputs = [python_dev_packages pkgs.scc];
   shellHook = ''
     if ! poetry env info -p; then
       poetry install

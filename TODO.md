@@ -1,7 +1,5 @@
 # TODO
 
-- [x] Nix stuff (package and devshell)
-- [x] Stderr project command debugging capabilities (print logs on error)
 - [ ] Graceful shutdown (kill/remove container after sigint)
 - [ ] Implement an install script for TeXbld
 - [ ] Allow singleton image usage for LocalImage (relative paths)
