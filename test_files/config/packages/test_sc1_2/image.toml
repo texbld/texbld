@@ -18,6 +18,7 @@ local = {name = "test_sc1_1", config = "anotherconfig.toml"}
 "Makefile" = "Makefile"
 
 [project.commands]
+cmd = "echo 'hello'"
 compile = "pandoc main.md -o main.pdf"
 watch = "latexmk -pdf -pvc main.tex"
 clean = "rm -rf main.tex"

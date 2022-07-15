@@ -2,8 +2,6 @@
 
 ## Bugs
 
-- [ ] Graceful shutdown hangs on texbld/cli/cli_test.py::test_local_full
-
 ## To Implement
 
 - [ ] Graceful shutdown (kill/remove container after sigint)
