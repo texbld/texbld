@@ -43,13 +43,14 @@ Run `pip install -U texbld`.
 
 Check the nix expressions in the release branch and configure accordingly.
 
-In order to build the master branch, run `nix-build`.
+In order to build the master branch, run `nix-build` or `nix build` (to use
+flakes).
 
 ## Setting Up This Project
 
 ### NixOS
 
-Running `nix-shell` **should** set up everything. Note, however, that the
+Running `nix develop` **should** set up everything. Note, however, that the
 resulting poetry virtual environment will be installed in
 `~/.cache/pypoetry/virtualenvs`, so it's not completely nix-based.
 
