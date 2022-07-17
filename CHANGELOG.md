@@ -2,7 +2,7 @@
 
 ## 0.3
 
-- Container shows error logs
+- Container shows error logs correctly.
 - Nix expressions for development
 
 ## 0.2
