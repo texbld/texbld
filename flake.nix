@@ -11,7 +11,7 @@
     defaultPackage.x86_64-linux = 
       pkgs.python3.pkgs.buildPythonPackage rec {
         pname = "texbld";
-        version = "0.3.dev0";
+        version = "0.4.dev0";
         src = ./.;
         format = "pyproject";
         propagatedBuildInputs = with pkgs.python3.pkgs;
