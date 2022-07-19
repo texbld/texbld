@@ -46,6 +46,8 @@
                 requests
                 toml
                 urllib3
+                pytest
+                pytest-xdist
               ];
           in pkgs.python3.withPackages deps);
         in pkgs.mkShell { buildInputs = [ python_dev_packages pkgs.scc ]; };
