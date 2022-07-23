@@ -6,12 +6,7 @@
 
   outputs = { self, nixpkgs, flake-utils }:
     with flake-utils.lib;
-    eachSystem [
-      system.x86_64-linux
-      system.x86_64-darwin
-      system.aarch64-linux
-      system.aarch64-darwin
-    ] (system:
+    eachDefaultSystem (system:
       let pkgs = import nixpkgs { inherit system; };
       in {
         defaultPackage = pkgs.python3.pkgs.buildPythonPackage rec {
