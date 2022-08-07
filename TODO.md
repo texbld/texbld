@@ -4,7 +4,7 @@
 
 ## To Implement
 
-- [ ] Implement an install script for TeXbld
+- [ ] Implement an install script for TeXbld (ongoing)
 - [ ] Allow singleton image usage for LocalImage (relative paths)
 - [ ] Alias system in `~/.config/texbld/aliases.toml`
 
@@ -16,3 +16,4 @@
 
 - [ ] API refactor?
 - [ ] Tarball registry?
+- [ ] Separate Tarball Image?
