@@ -1,0 +1,13 @@
+name: Building TeXbld
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.4.0
+      - uses: docker-practice/actions-setup-docker@master
+      - uses: cachix/install-nix-action@v15
+        with:
+          install_url: https://nixos-nix-install-tests.cachix.org/serve/vij683ly7sl95nnhb67bdjjfabclr85m/install
+          install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
+      - run: nix-shell --command "pytest"
