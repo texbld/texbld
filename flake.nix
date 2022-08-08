@@ -31,22 +31,26 @@
           doCheck = false;
         };
         packages = flattenTree {
-          pyz = let
+          zipapp = let
             custompython = pkgs.python39.withPackages
                 (ps: with ps; [ jsonschema docker toml urllib3 shiv poetry ]);
             in
             pkgs.stdenv.mkDerivation {
               inherit version;
               src = ./.;
-              name = "texbld-pyz";
-              buildInputs = [ custompython pkgs.poetry ];
-              phases = ["buildPhase"];
+              name = "texbld-zipapp";
+              buildInputs = [ custompython pkgs.poetry pkgs.bash ];
+              phases = [ "configurePhase" "buildPhase"];
+              configurePhase = ''
+                cd $src
+                mkdir -p $out
+                cp -Lr ${custompython}/${custompython.sitePackages} $out/dist
+                chmod u+w $out/dist
+                cp -r $src/* $out/dist/
+              '';
               buildPhase = ''
                 cd $src
-                mkdir -p $out/dist
-                cp -r ${custompython}/${custompython.sitePackages} $out/dist
-                cp -r -t $out/dist $src/texbld
-                ${pkgs.python39.pkgs.shiv}/bin/shiv --site-packages $out/dist -o $out/texbld-${version}.pyz -e texbld.cli.run
+                ${pkgs.python39.pkgs.shiv}/bin/shiv --compressed --site-packages $out/dist -o $out/texbld-${version}.pyz -e texbld.cli.run
               '';
               doCheck = false;
             };
