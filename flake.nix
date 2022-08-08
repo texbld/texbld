@@ -39,7 +39,7 @@
               inherit version;
               src = ./.;
               name = "texbld-zipapp";
-              buildInputs = [ custompython pkgs.poetry pkgs.bash ];
+              buildInputs = [ custompython pkgs.poetry ];
               phases = [ "configurePhase" "buildPhase"];
               configurePhase = ''
                 cd $src

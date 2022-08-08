@@ -3,6 +3,7 @@
 ## 0.4
 
 - Removed requests dependency
+- Build as a .pyz file (no python dependencies)
 
 ## 0.3
 
