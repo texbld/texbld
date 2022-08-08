@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "A Modern Build Tool for Your Papers";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
   inputs.flake-utils.url = "github:numtide/flake-utils";
@@ -17,7 +17,6 @@
           propagatedBuildInputs = with pkgs.python3.pkgs; [
             jsonschema
             docker
-            requests
             toml
             urllib3
           ];

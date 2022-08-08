@@ -39,6 +39,16 @@ def test_github_3():
     assert os.path.isfile(os.path.join(dr, "texbld.toml"))
     assert not os.path.isfile(os.path.join(dr, "main.tex"))
 
+def test_github_4():
+    os.chdir(SCAFFOLD_TESTS)
+    dr = os.path.join(SCAFFOLD_TESTS, "cli_github_4")
+    if os.path.isdir(dr):
+        shutil.rmtree(dr)
+    args = 'generate p github:texbld/sample-image#04f2b5a50d65eeb2b42f7329c7eea37d8c880c85 --config markdown.toml cli_github_4'
+    execute(args.split())
+    assert os.path.isfile(os.path.join(dr, "main.md"))
+    assert os.path.isfile(os.path.join(dr, "texbld.toml"))
+    assert not os.path.isfile(os.path.join(dr, "main.tex"))
 
 def test_docker():
     os.chdir(SCAFFOLD_TESTS)

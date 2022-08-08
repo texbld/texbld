@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4
+
+- Removed requests dependency
+
 ## 0.3
 
 - Container shows error logs

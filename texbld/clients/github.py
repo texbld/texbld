@@ -1,7 +1,6 @@
 from texbld.directory import PACKAGE_CACHE_DIR, TARBALL_CACHE_DIR
 from texbld.exceptions import GitHubNotFound, HashMismatch
 from dataclasses import dataclass, field
-import urllib3
 import shutil
 import os
 import hashlib
@@ -9,8 +8,7 @@ import tarfile
 from texbld.clients.client import Client
 
 from texbld.clients.fs import ImageFsBrowser
-
-http = urllib3.PoolManager()
+from texbld.globals import http
 
 
 @dataclass

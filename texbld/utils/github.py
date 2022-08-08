@@ -1,6 +1,7 @@
+import json
 from texbld.exceptions import GitHubNotFound
 import texbld.logger as logger
-import requests
+from texbld.globals import http
 
 
 def get_github_rev(owner: str, repository: str, rev: str):
@@ -9,18 +10,18 @@ def get_github_rev(owner: str, repository: str, rev: str):
     if rev is None:
         logger.progress("No revision specified, getting the latest commit...")
         api_url = f"https://api.github.com/repos/{owner}/{repository}/commits"
-        res = requests.get(api_url)
-        data = res.json()
-        if res.status_code != 200 or len(data) == 0:
+        res = http.request("GET", api_url)
+        data = json.loads(res.data.decode("utf-8"))
+        if res.status != 200 or len(data) == 0:
             raise GitHubNotFound(api_url)
         else:
             data = data[0]
     else:
         api_url = f"https://api.github.com/repos/{owner}/{repository}/commits/{rev}"
-        res = requests.get(api_url)
-        if res.status_code != 200:
+        res = http.request("GET", api_url)
+        if res.status != 200:
             raise GitHubNotFound(api_url)
-        data = res.json()
+        data = json.loads(res.data.decode("utf-8"))
 
     rev = data['sha']
     logger.done(f"Got revision {rev}")
