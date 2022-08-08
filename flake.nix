@@ -45,13 +45,15 @@
                 cd $src
                 mkdir -p $out
                 cp -Lr ${custompython}/${custompython.sitePackages} $out/dist
-                chmod u+w $out/dist
-                cp -r $src/* $out/dist/
+                chmod -R +w $out/dist
+                cp -Lr $src/* $out/dist/
+                chmod -R +w $out/dist
               '';
               buildPhase = ''
                 cd $src
                 ${pkgs.python39.pkgs.shiv}/bin/shiv --compressed --site-packages $out/dist -o $out/texbld-${version}.pyz -e texbld.cli.run
                 sha256sum -b $out/texbld-${version}.pyz > $out/texbld-${version}.pyz.sha256sum
+                rm -rf $out/dist
               '';
               doCheck = false;
             };
