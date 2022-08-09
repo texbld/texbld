@@ -1,4 +1,4 @@
-name: Building TeXbld
+name: Zipapp
 on: [push, pull_request]
 jobs:
   build:
