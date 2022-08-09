@@ -1,7 +1,8 @@
-name: Zipapp
+name: Nightly Zipapp builds
 on:
   schedule:
-    - cron: '0 0 */2 * *'
+    - cron: '0 0 */1 * *'
+  workflow_dispatch: ''
 
 jobs:
   build:
