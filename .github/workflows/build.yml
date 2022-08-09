@@ -17,4 +17,4 @@ jobs:
       - run: cp -Lr result out
       - name: Upload to releases
         run: |
-          gh release create nightly -P --title --target $GITHUB_SHA "TeXbld Nightly Build" out/*
+          gh release create nightly --prerelease --title --target $GITHUB_SHA "TeXbld Nightly Build" out/*
