@@ -15,5 +15,5 @@ jobs:
       - run: nix build .#zipapp
       - run: cp -Lr result out
       - name: Upload to releases
-        - run: |
+        run: |
           gh release create nightly -P --title --target $GITHUB_SHA "TeXbld Nightly Build" out/*
