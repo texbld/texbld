@@ -39,6 +39,7 @@ def test_github_3():
     assert os.path.isfile(os.path.join(dr, "texbld.toml"))
     assert not os.path.isfile(os.path.join(dr, "main.tex"))
 
+
 def test_github_4():
     os.chdir(SCAFFOLD_TESTS)
     dr = os.path.join(SCAFFOLD_TESTS, "cli_github_4")
@@ -49,6 +50,7 @@ def test_github_4():
     assert os.path.isfile(os.path.join(dr, "main.md"))
     assert os.path.isfile(os.path.join(dr, "texbld.toml"))
     assert not os.path.isfile(os.path.join(dr, "main.tex"))
+
 
 def test_docker():
     os.chdir(SCAFFOLD_TESTS)
