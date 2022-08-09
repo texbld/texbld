@@ -51,8 +51,8 @@
               '';
               buildPhase = ''
                 cd $src
-                ${pkgs.python39.pkgs.shiv}/bin/shiv --compressed --site-packages $out/dist -o $out/texbld-${version}.pyz -e texbld.cli.run
-                sha256sum -b $out/texbld-${version}.pyz > $out/texbld-${version}.pyz.sha256sum
+                ${pkgs.python39.pkgs.shiv}/bin/shiv --compressed --site-packages $out/dist -o $out/texbld.pyz -e texbld.cli.run
+                sha256sum -b $out/texbld.pyz > $out/texbld.pyz.sha256sum
                 rm -rf $out/dist
               '';
               doCheck = false;
