@@ -14,8 +14,6 @@ jobs:
           install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
       - run: nix build .#zipapp
       - run: cp -Lr result out
-      - name: upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: TeXbld zipapp
-          path: ./out
+      - name: Upload to releases
+        - run: |
+          gh release create nightly -P --title --target $GITHUB_SHA "TeXbld Nightly Build" out/*
