@@ -20,10 +20,10 @@ design, these images were forced to be monolithic, bloated, and ultimately
 inflexible. Each build should have exactly the dependencies that it requires
 and nothing more!
 
-`texbld` aims to solve these problems by providing an environment where build images
-are fully reproducible and shareable. It uses docker for absolute system
-reproducibility and for usage across all platforms which it supports (MacOS,
-Windows, and its native Linux).
+`texbld` aims to solve these problems by providing an environment where build
+images are fully reproducible and shareable. It uses docker for absolute system
+reproducibility and for usage across all platforms which it supports (MacOS, its
+native Linux, and Windows (untested)).
 
 Image hashes are used to ensure that any docker image is **completely immutable**,
 preventing dependency modification issues.
@@ -37,7 +37,8 @@ Images can be inherited from packages in the local filesystem, GitHub, or Docker
 ## Installation
 
 The project is live on [pypi](https://pypi.org/project/texbld/).
-Run `pip install -U texbld`.
+
+Various installation methods are described [here](https://texbld.com/docs).
 
 ### NixOS
 
