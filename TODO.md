@@ -8,11 +8,13 @@
 - [ ] Allow singleton image usage for LocalImage (relative paths)
 - [ ] Alias system in `~/.config/texbld/aliases.toml`
 - [ ] Environment variables for dynamic configuration
+- [ ] Change Resource Schemes to be more nix-like (Get rid of \# for branch)
 
 ## Config version 2
 
 - [ ] Automatic package manager deduction (custom ways of dealing with them)
 - [ ] Automatically determining packages? (Annoying non-existent errors)
+- [ ] Arbitrary Arguments to `texbld run` (e.g. `"compile $" = "pandoc $1 -o output.pdf"`)
 
 ## Far
 
