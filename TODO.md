@@ -4,11 +4,12 @@
 
 ## To Implement
 
-- [ ] Implement an install script for TeXbld (ongoing)
+- [x] Implement an install script for TeXbld (ongoing)
 - [ ] Allow singleton image usage for LocalImage (relative paths)
 - [ ] Alias system in `~/.config/texbld/aliases.toml`
 - [ ] Environment variables for dynamic configuration
 - [ ] Change Resource Schemes to be more nix-like (Get rid of \# for branch)
+- [ ] Use the low-level APIClient to stream logs when building images
 
 ## Config version 2
 
