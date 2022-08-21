@@ -96,7 +96,7 @@ def run_with_handlers(f: 'function'):
             logger.error(
                 f"Could not find any of the following files:\n{files}")
         else:
-            logger.error(f"Could not find file {f}.")
+            logger.error(f"Could not find file {fle}.")
         sys.exit(1)
     except FileExistsError as e:
         f, = e.args
