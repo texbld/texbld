@@ -4,28 +4,23 @@ from texbld.config import PROJECT_CONFIG_FILE
 import texbld.logger as logger
 from docker.errors import ContainerError, BuildError, DockerException
 
-# tuple of actual and received hashes.
-
 
 class HashMismatch(Exception):
     def __init__(self, expected: str, received: str) -> None:
         super().__init__(expected, received)
 
 
-# the github tarball url that could not be curled.
 class GitHubNotFound(Exception):
     def __init__(self, url: str) -> None:
         super().__init__(url)
 
 
-# image name that couldn't be pulled.
 class DockerNotFound(Exception):
     def __init__(self, image: str) -> None:
         super().__init__(image)
     pass
 
 
-# contains the string with the undefined version.
 class NoSuchVersion(Exception):
     def __init__(self, version: str) -> None:
         super().__init__(version)
@@ -36,13 +31,11 @@ class NoVersionSpecified(Exception):
         super().__init__()
 
 
-# contains the list of images that have dependency cycles.
 class DependencyCycle(Exception):
     def __init__(self, images: list) -> None:
         super().__init__(images)
 
 
-# command not found for a project
 class CommandNotFound(Exception):
     def __init__(self, command: str) -> None:
         super().__init__(command)
@@ -99,8 +92,8 @@ def run_with_handlers(f: 'function'):
             logger.error(f"Could not find file {fle}.")
         sys.exit(1)
     except FileExistsError as e:
-        f, = e.args
-        logger.error(f"File {f} already exists. Aborting")
+        fle, = e.args
+        logger.error(f"File {fle} already exists. Aborting")
         sys.exit(1)
     except ContainerError as e:
         code = e.exit_status
