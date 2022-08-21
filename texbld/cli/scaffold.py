@@ -4,7 +4,7 @@ from texbld.scaffold import scaffold_project, scaffold_image
 
 
 def scaffold_project_cli(args):
-    image = ImageResource.get_image(args.resource, args.config)
+    image = ImageResource.get_image(args.resource)
     scaffold_project(image, args.directory)
 
 
@@ -19,8 +19,6 @@ def add_scaffold_args(parser: ArgumentParser):
     project.add_argument(
         'resource', help='TeXbld image resource', type=image_resource_type)
     project.add_argument('directory', help='Directory to use for scaffolding')
-    project.add_argument('--config', '-c', default='image.toml',
-                         help='where the image configuration resides')
     project.set_defaults(func=scaffold_project_cli)
 
     image = subparsers.add_parser(

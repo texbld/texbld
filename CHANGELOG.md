@@ -5,6 +5,7 @@
 - Removed requests dependency
 - Build as a .pyz file (no python dependencies)
 - Build logs for images are shown
+- Cleaner Resource schemes (github:owner/repo/branch#configpath, local:package#configpath)
 
 ## 0.3
 

@@ -11,7 +11,7 @@ def test_github_1():
     dr = os.path.join(SCAFFOLD_TESTS, "cli_github_1")
     if os.path.isdir(dr):
         shutil.rmtree(dr)
-    args = 'generate project github:texbld/sample-image#master --config markdown.toml cli_github_1'
+    args = 'generate project github:texbld/sample-image/master#markdown.toml cli_github_1'
     execute(args.split())
     assert os.path.isfile(os.path.join(dr, "main.md"))
     assert os.path.isfile(os.path.join(dr, "texbld.toml"))
@@ -23,7 +23,7 @@ def test_github_2():
     dr = os.path.join(SCAFFOLD_TESTS, "cli_github_2")
     if os.path.isdir(dr):
         shutil.rmtree(dr)
-    args = 'generate project github:texbld/sample-image#nonexistent cli_github_2'
+    args = 'generate project github:texbld/sample-image/nonexistent cli_github_2'
     with pytest.raises(GitHubNotFound):
         execute(args.split())
 
@@ -33,7 +33,7 @@ def test_github_3():
     dr = os.path.join(SCAFFOLD_TESTS, "cli_github_3")
     if os.path.isdir(dr):
         shutil.rmtree(dr)
-    args = 'generate p github:texbld/sample-image --config markdown.toml cli_github_3'
+    args = 'generate p github:texbld/sample-image#markdown.toml cli_github_3'
     execute(args.split())
     assert os.path.isfile(os.path.join(dr, "main.md"))
     assert os.path.isfile(os.path.join(dr, "texbld.toml"))
@@ -45,7 +45,7 @@ def test_github_4():
     dr = os.path.join(SCAFFOLD_TESTS, "cli_github_4")
     if os.path.isdir(dr):
         shutil.rmtree(dr)
-    args = 'generate p github:texbld/sample-image#04f2b5a50d65eeb2b42f7329c7eea37d8c880c85 --config markdown.toml cli_github_4'
+    args = 'generate p github:texbld/sample-image/04f2b5a50d65eeb2b42f7329c7eea37d8c880c85#markdown.toml cli_github_4'
     execute(args.split())
     assert os.path.isfile(os.path.join(dr, "main.md"))
     assert os.path.isfile(os.path.join(dr, "texbld.toml"))

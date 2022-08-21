@@ -6,7 +6,8 @@ from texbld.utils.github import get_github_rev
 
 def getsha256(resource):
     if mch := ImageResource.github_regex.fullmatch(resource):
-        owner, repository, rev = mch.groups()
+        # we don't care about the config file here.
+        owner, repository, rev, _ = mch.groups()
         rev = rev[1:] if rev is not None and len(rev) > 1 else None
         rev = get_github_rev(owner, repository, rev)
         image = GitHubImage(owner, repository, rev, sha256=None)
