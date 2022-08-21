@@ -1,5 +1,6 @@
 from typing import TYPE_CHECKING
 import texbld.logger as logger
+import sys
 
 if TYPE_CHECKING:
     from texbld.common.image import Image
@@ -13,8 +14,10 @@ def build_image(image: 'Image', cache=False):
     image.copy_to_builds(cache=cache)
     logger.done(f"Copied {image.docker_image_name()}")
     logger.progress(f"Building {image.docker_image_name()}...")
-    dockerclient.images.build(path=image.build_dir(),
-                              tag=image.docker_image_name(), quiet=False)
+    generator = dockerclient.api.build(path=image.build_dir(), tag=image.docker_image_name(), decode=True)
+    for line in generator:
+        if x := line.get('stream'):
+            sys.stdout.write(x)
     logger.done(f"Finished building {image.docker_image_name()}")
 
 
