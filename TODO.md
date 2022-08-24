@@ -20,5 +20,5 @@
 ## Far
 
 - [ ] API refactor?
-- [ ] Tarball registry?
+- [ ] Official Registry of cached builds
 - [ ] Separate Tarball Image?
