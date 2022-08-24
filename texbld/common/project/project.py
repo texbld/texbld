@@ -7,6 +7,7 @@ from texbld.docker.build import build as build_dockerimage
 import texbld.logger as logger
 import signal
 from docker.errors import NotFound
+import sys
 
 
 @dataclass
@@ -42,7 +43,7 @@ class Project:
         logger.progress(f"Starting {self.image.docker_image_name()}...")
         container.start()
         for data in container.logs(stream=True, follow=True):
-            print(data.decode())
+            sys.stdout.write(data.decode())
         try:
             logger.progress('Running cleanup...')
             container.remove(force=True)
