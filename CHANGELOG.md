@@ -6,6 +6,7 @@
 - Build as a .pyz file (no python dependencies)
 - Build logs for images are shown
 - Cleaner Resource schemes (github:owner/repo/branch#configpath, local:package#configpath)
+- Environmental variables (TEXBLD_CACHE, TEXBLD_PACKAGES)
 
 ## 0.3
 
