@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
 pkgs.python3.pkgs.buildPythonPackage rec {
   pname = "texbld";
-  version = "0.4.0";
+  version = "0.4.1";
   src = ./.;
   format = "pyproject";
 

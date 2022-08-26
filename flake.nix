@@ -9,7 +9,7 @@
     eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-        version = "0.4.0";
+        version = "0.4.1";
       in {
         defaultPackage = pkgs.python3.pkgs.buildPythonPackage rec {
           inherit version;

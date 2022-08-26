@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "texbld"
-version = "0.4.0"
+version = "0.4.1"
 description = "A dockerized build tool for paper compilation"
 authors = ["junikimm717 <junikimm717@gmail.com>"]
 license = "GPL-3.0-or-later"
