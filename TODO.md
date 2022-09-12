@@ -5,7 +5,7 @@
 ## To Implement
 
 - [ ] Allow singleton image usage for LocalImage (relative paths)
-- [ ] Alias system in `~/.config/texbld/aliases.toml`
+- [ ] Replacing GitHub images (updating revisions, changing image repo, ...)
 
 ## Config version 2
 
