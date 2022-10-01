@@ -8,6 +8,7 @@
 - [ ] Allow singleton image usage for LocalImage (relative paths)
 - [ ] Replacing GitHub images with CLI utility (updating revisions, changing
       image repo, ...)
+- [ ] Completely broken on an ARM-based RPI?
 
 ## Config version 2
 
