@@ -6,7 +6,7 @@ install = "apk add"
 update = "apk update"
 
 packages = [
-  "biber", "python3"
+  "python3", "bash"
 ]
 
 [inherit]

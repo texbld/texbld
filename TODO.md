@@ -4,7 +4,7 @@
 
 ## To Implement
 
-- [ ] `texbld validate` has inconsistent schemes.
+- [x] `texbld validate` has inconsistent schemes.
 - [ ] Allow singleton image usage for LocalImage (relative paths)
 - [ ] Replacing GitHub images with CLI utility (updating revisions, changing
       image repo, ...)

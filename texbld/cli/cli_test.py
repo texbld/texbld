@@ -75,14 +75,18 @@ def test_image_1():
     assert "cli_image_1" in open(os.path.join(dr, "image.toml")).read()
 
 
+def test_validate_github():
+    execute('validate image github:texbld/sample-image/master#markdown.toml'.split())
+
+
 def test_local_1():
     with pytest.raises(DependencyCycle):
-        execute('validate image test_dep2_1'.split())
+        execute('validate image local:test_dep2_1'.split())
 
 
 def test_local_depcycle():
     with pytest.raises(DependencyCycle):
-        execute('validate image test_dep2_1'.split())
+        execute('validate image local:test_dep2_1'.split())
 
 
 def test_local_full():

@@ -3,12 +3,13 @@ from texbld.utils.search import search_up_project
 from texbld.common.image import LocalImage
 from texbld.common.solver import Solver
 from texbld.docker.build import build
+from texbld.cli.resource import ImageResource
 from texbld.scaffold.validate import validate_solver_files
 
 
-# takes a LocalImage and validates it.
+# takes an image and validates it.
 def validate_image(args):
-    s = Solver(LocalImage(name=args.name, config=args.config))
+    s = Solver(ImageResource.get_image(args.name))
     build(s, cache=args.cache)
     validate_solver_files(s)
 
@@ -22,9 +23,7 @@ def add_validate_args(parser: ArgumentParser):
     subparsers = parser.add_subparsers()
     image = subparsers.add_parser(
         'image', aliases=['i'], help="Validate a local image")
-    image.add_argument('name', help='Name of the local image to validate')
-    image.add_argument('--config', '-c', default='image.toml',
-                       help='where the image configuration resides')
+    image.add_argument('name', help='TeXbld image resource scheme')
     image.add_argument('--cache', action='store_true',
                        help="Use cache when validating")
     image.set_defaults(func=validate_image)

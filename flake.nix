@@ -1,8 +1,11 @@
 {
   description = "A Modern Build Tool for Your Papers";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+  inputs.flake-utils = {
+    url = "github:numtide/flake-utils";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   outputs = { self, nixpkgs, flake-utils }:
     with flake-utils.lib;
@@ -32,7 +35,7 @@
         };
         packages = flattenTree {
           zipapp = let
-            custompython = pkgs.python39.withPackages
+            custompython = pkgs.python310.withPackages
                 (ps: with ps; [ jsonschema docker toml urllib3 shiv poetry ]);
             in
             pkgs.stdenv.mkDerivation {
