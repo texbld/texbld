@@ -14,7 +14,8 @@ def build_image(image: 'Image', cache=False):
     image.copy_to_builds(cache=cache)
     logger.done(f"Copied {image.docker_image_name()}")
     logger.progress(f"Building {image.docker_image_name()}...")
-    generator = dockerclient.api.build(path=image.build_dir(), tag=image.docker_image_name(), decode=True)
+    generator = dockerclient.api.build(
+        path=image.build_dir(), tag=image.docker_image_name(), decode=True)
     for line in generator:
         if x := line.get('stream'):
             sys.stdout.write(x)

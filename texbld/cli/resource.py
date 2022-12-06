@@ -29,7 +29,8 @@ class ImageResource:
             rev = rev[1:] if rev is not None and len(rev) > 1 else None
             rev = get_github_rev(owner, repository, rev)
 
-            config = config[1:] if config is not None and len(config) > 1 else "image.toml"
+            config = config[1:] if config is not None and len(
+                config) > 1 else "image.toml"
             # pull the image
             image = GitHubImage(owner=owner, repository=repository,
                                 revision=rev, config=config, sha256=None)
@@ -44,5 +45,6 @@ class ImageResource:
 
         elif mch := cls.local_regex.fullmatch(resource):
             image, config = mch.groups()
-            config = config[1:] if config is not None and len(config) > 1 else "image.toml"
+            config = config[1:] if config is not None and len(
+                config) > 1 else "image.toml"
             return LocalImage(name=image, config=config)
