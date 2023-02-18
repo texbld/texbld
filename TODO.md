@@ -10,7 +10,7 @@
 
 ## Config version 2
 
-- [ ] Automatic package manager deduction
+- [ ] Automatic package manager deduction per Linux distribution
 - [ ] Automatically determining packages? (Annoying non-existent errors)
 - [ ] Arbitrary Arguments to `texbld run` (e.g. `"compile $" = "pandoc $1 -o output.pdf"`)
 
